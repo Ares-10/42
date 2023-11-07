@@ -6,11 +6,12 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 18:53:09 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/10/26 18:53:45 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:48:31 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <unistd.h>
 
 void	ft_putstr_fd(char *s, int fd)
 {

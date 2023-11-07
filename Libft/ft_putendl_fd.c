@@ -6,7 +6,7 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 18:54:02 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/10/26 18:55:34 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:57:18 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	ft_putendl_fd(char *s, int fd)
 {
 	ft_putstr_fd(s, fd);
-	write(fd, "\n", 1);
+	ft_putstr_fd("\n", fd);
 }

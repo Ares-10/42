@@ -6,11 +6,12 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:05:02 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/10/26 20:29:59 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:54:43 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 char	*ft_strtrim(char const *s1, char const *set)
 {

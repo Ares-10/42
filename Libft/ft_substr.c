@@ -6,11 +6,13 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 16:48:00 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/10/26 20:50:32 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:54:18 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
+#include <stdlib.h>
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

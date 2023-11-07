@@ -6,11 +6,11 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 19:58:07 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/10/05 20:13:32 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:50:25 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "string.h"
 
 size_t	ft_strlen(const char *s)
 {

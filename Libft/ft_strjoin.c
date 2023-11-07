@@ -6,17 +6,18 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 16:55:46 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/10/26 20:35:13 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:54:28 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
-	size_t	s1_len;
-	size_t	s2_len;
+	int		s1_len;
+	int		s2_len;
 
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);

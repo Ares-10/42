@@ -6,11 +6,9 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:40:23 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/10/16 21:56:15 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:48:54 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {

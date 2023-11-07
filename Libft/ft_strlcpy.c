@@ -6,11 +6,12 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 21:34:39 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/10/16 21:09:07 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:50:12 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "string.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {

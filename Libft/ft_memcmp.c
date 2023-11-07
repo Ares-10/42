@@ -6,11 +6,11 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:22:52 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/10/10 18:59:28 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:41:54 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {

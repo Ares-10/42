@@ -6,11 +6,12 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 18:25:17 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/10/26 22:31:19 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:55:39 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 size_t	integer_len(int n)
 {

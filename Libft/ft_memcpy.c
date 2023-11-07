@@ -6,11 +6,11 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 20:15:14 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/10/16 21:44:41 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:41:58 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
 
 void	*ft_memcpy(void *dest, const void *source, size_t n)
 {
