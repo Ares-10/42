@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:24:19 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/11/11 23:03:09 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/11/11 23:28:45 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-char	*gnl_read_line(int fd, char *buf, char *backup)
+static char	*gnl_read_line(int fd, char *buf, char *backup)
 {
 	int		read_size;
 	char	*temp;
@@ -40,7 +40,7 @@ char	*gnl_read_line(int fd, char *buf, char *backup)
 	return (backup);
 }
 
-char	*gnl_get_line(char *backup)
+static char	*gnl_get_line(char *backup)
 {
 	int		i;
 	char	*line;
@@ -80,12 +80,16 @@ char	*gnl_update_backup(char *backup, char *line)
 
 char	*get_next_line(int fd)
 {
-	static char	*backup;
-	char		*buf;
-	char		*line;
+	static t_list	*lst;
+	char			*buf;
+	char			*line;
+	char			*backup;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	backup = gnl_lstget_fd_backup(lst, fd)
+	if (backup)
+		backup gnl_lstadd_front(&lst, gnl_lstnew(fd));
 	if (!backup)
 		backup = gnl_strjoin("", "");
 	if (!backup)

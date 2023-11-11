@@ -6,7 +6,7 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 19:25:01 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/11/11 20:15:28 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/11/11 22:36:05 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ size_t	gnl_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	if (!s)
-		return (0);
 	while (s[i] != '\0')
 		i++;
 	return (i);
