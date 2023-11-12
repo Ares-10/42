@@ -6,37 +6,84 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 19:25:01 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/11/11 23:28:42 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/11/12 18:56:36 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-void	gnl_lstadd_front(t_list **lst, t_list *new)
+size_t	gnl_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	if (*lst == 0)
-		*lst = new;
-	else
+	size_t	i;
+	size_t	srcsize;
+
+	i = 0;
+	srcsize = gnl_strlen(src);
+	if (!dstsize)
+		return (srcsize);
+	while (src[i] && i < dstsize - 1)
 	{
-		new->next = *lst;
-		*lst = new;
+		dst[i] = src[i];
+		i++;
 	}
+	dst[i] = '\0';
+	return (srcsize);
 }
 
-void	gnl_lstdelone(t_list *lst, void (*del)(void *))
+char	*gnl_substr(char const *s, unsigned int start, size_t len)
 {
-	del(lst->content);
-	free(lst);
-}
+	char	*str;
+	size_t	s_len;
 
-t_list	*gnl_lstnew(int fd)
-{
-	t_list	*node;
-
-	node = (t_list *)malloc(sizeof(t_list));
-	if (!node)
+	s_len = gnl_strlen(s);
+	if (s_len <= start)
+	{
+		str = (char *)malloc(1);
+		if (!str)
+			return (NULL);
+		str[0] = '\0';
+		return (str);
+	}
+	if (s_len - start < len)
+		len = s_len - start;
+	str = (char *)malloc(len + 1);
+	if (!str)
 		return (0);
-	node->fd = fd;
-	node->next = 0;
-	return (node);
+	gnl_strlcpy(str, s + start, len + 1);
+	return (str);
+}
+
+char	*gnl_strjoin(char const *s1, char const *s2)
+{
+	char	*str;
+	int		s1_len;
+	int		s2_len;
+
+	s1_len = gnl_strlen(s1);
+	s2_len = gnl_strlen(s2);
+	str = (char *)malloc(s1_len + s2_len + 1);
+	if (!str)
+		return (0);
+	gnl_strlcpy(str, s1, s1_len + 1);
+	gnl_strlcpy(str + s1_len, s2, s2_len + 1);
+	return (str);
+}
+
+char	*gnl_strchr(const char *s, int c)
+{
+	while (*s && *s != (unsigned char)c)
+		s++;
+	if (*s == '\0')
+		return (0);
+	return ((char *)s);
+}
+
+size_t	gnl_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }

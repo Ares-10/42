@@ -6,11 +6,12 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:24:19 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/11/11 23:28:45 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/11/12 19:09:22 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <limits.h>
 #include "get_next_line_bonus.h"
 
 static char	*gnl_read_line(int fd, char *buf, char *backup)
@@ -80,30 +81,26 @@ char	*gnl_update_backup(char *backup, char *line)
 
 char	*get_next_line(int fd)
 {
-	static t_list	*lst;
-	char			*buf;
-	char			*line;
-	char			*backup;
+	static char	*backup[OPEN_MAX];
+	char		*buf;
+	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	backup = gnl_lstget_fd_backup(lst, fd)
-	if (backup)
-		backup gnl_lstadd_front(&lst, gnl_lstnew(fd));
-	if (!backup)
-		backup = gnl_strjoin("", "");
-	if (!backup)
+	if (!backup[fd])
+		backup[fd] = gnl_strjoin("", "");
+	if (!backup[fd])
 		return (NULL);
 	buf = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);
-	backup = gnl_read_line(fd, buf, backup);
+	backup[fd] = gnl_read_line(fd, buf, backup[fd]);
 	free(buf);
-	if (!backup)
+	if (!backup[fd])
 		return (NULL);
-	line = gnl_get_line(backup);
+	line = gnl_get_line(backup[fd]);
 	if (!line)
 		return (NULL);
-	backup = gnl_update_backup(backup, line);
+	backup[fd] = gnl_update_backup(backup[fd], line);
 	return (line);
 }
