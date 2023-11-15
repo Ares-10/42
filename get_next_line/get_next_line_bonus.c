@@ -6,7 +6,7 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:24:19 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/11/12 19:09:22 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/11/15 18:24:15 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*get_next_line(int fd)
 	char		*buf;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= OPEN_MAX)
 		return (NULL);
 	if (!backup[fd])
 		backup[fd] = gnl_strjoin("", "");
@@ -93,7 +93,10 @@ char	*get_next_line(int fd)
 		return (NULL);
 	buf = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buf)
+	{
+		free(backup);
 		return (NULL);
+	}
 	backup[fd] = gnl_read_line(fd, buf, backup[fd]);
 	free(buf);
 	if (!backup[fd])
