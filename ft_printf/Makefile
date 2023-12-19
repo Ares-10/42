@@ -6,13 +6,13 @@
 #    By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 19:27:01 by hyungcho          #+#    #+#              #
-#    Updated: 2023/12/19 18:20:00 by hyungcho         ###   ########.fr        #
+#    Updated: 2023/12/19 20:13:46 by hyungcho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRCS = ft_printf.c ft_format_conversion ft_printf_utils.c
+SRCS = ft_printf.c ft_printf_utils.c
 
 OBJS = $(SRCS:.c=.o)
 
