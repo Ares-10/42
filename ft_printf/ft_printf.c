@@ -6,7 +6,7 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 21:53:38 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/12/19 20:13:02 by hyungcho         ###   ########.fr       */
+/*   Updated: 2023/12/22 15:48:12 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include <unistd.h>
 #include "ft_printf.h"
 
-static void	ft_s_conversion(char *str, int *len);
-static void	ft_p_conversion(void *ptr, int *len);
-static void	ft_u_conversion(unsigned int n, int *len);
-static void	ft_format_conversion(va_list ap, char ch, int *len);
+static int	ft_s_conversion(char *str, int *len);
+static int	ft_p_conversion(void *ptr, int *len);
+static int	ft_u_conversion(unsigned int n, int *len);
+static int	ft_format_conversion(va_list ap, char ch, int *len);
 
 int	ft_printf(const char *str, ...)
 {
@@ -31,65 +31,62 @@ int	ft_printf(const char *str, ...)
 	while (*str)
 	{
 		if (*str != '%')
-		{
-			write(1, str, 1);
-			len++;
+		{	
+			if (ft_prf_putchar(*str, &len) == -1)
+				return (-1);
 		}
 		else
-		{
-			str++;
-			ft_format_conversion(ap, *str, &len);
-		}
+			if (ft_format_conversion(ap, *(++str), &len) == -1)
+				return (-1);
 		str++;
 	}
 	va_end(ap);
 	return (len);
 }
 
-void	ft_format_conversion(va_list ap, char ch, int *len)
+int	ft_format_conversion(va_list ap, char ch, int *len)
 {
+	char	hex_string[10];
+
 	if (ch == 'c')
-		ft_prf_putchar(va_arg(ap, int), len);
+		return (ft_prf_putchar(va_arg(ap, int), len));
 	else if (ch == 's')
-		ft_s_conversion(va_arg(ap, char *), len);
+		return (ft_s_conversion(va_arg(ap, char *), len));
 	else if (ch == 'p')
-		ft_p_conversion(va_arg(ap, void *), len);
+		return (ft_p_conversion(va_arg(ap, void *), len));
 	else if (ch == 'd')
-		ft_prf_putnbr(va_arg(ap, int), len);
+		return (ft_prf_putnbr(va_arg(ap, int), len));
 	else if (ch == 'i')
-		ft_prf_putnbr(va_arg(ap, int), len);
+		return (ft_prf_putnbr(va_arg(ap, int), len));
 	else if (ch == 'u')
-		ft_u_conversion(va_arg(ap, unsigned int), len);
+		return (ft_u_conversion(va_arg(ap, unsigned int), len));
 	else if (ch == 'x')
-		ft_prf_itohex(va_arg(ap, int), len, 1);
+		return (ft_prf_itohex(va_arg(ap, int), hex_string, len, 1));
 	else if (ch == 'X')
-		ft_prf_itohex(va_arg(ap, int), len, 2);
+		return (ft_prf_itohex(va_arg(ap, int), hex_string, len, 2));
 	else if (ch == '%')
-		ft_prf_putchar('%', len);
+		return (ft_prf_putchar('%', len));
+	else
+		return (-1);
 }
 
-void	ft_s_conversion(char *str, int *len)
+int	ft_s_conversion(char *str, int *len)
 {
 	if (str == NULL)
-	{
-		ft_prf_putstr("(null)", len);
-		return ;
-	}
-	ft_prf_putstr(str, len);
+		return (ft_prf_putstr("(null)", len));
+	return (ft_prf_putstr(str, len));
 }
 
-void	ft_p_conversion(void *ptr, int *len)
+int	ft_p_conversion(void *ptr, int *len)
 {
 	unsigned long long	address;
 	char				hex_string[20];
 	int					i;
 
-	ft_prf_putstr("0x", len);
+	if (ft_prf_putstr("0x", len) == -1)
+		return (-1);
 	if (ptr == NULL)
-	{
-		ft_prf_putchar('0', len);
-		return ;
-	}
+		return (ft_prf_putchar('0', len));
 	address = (unsigned long long)ptr;
 	i = 0;
 	while (address)
@@ -102,13 +99,15 @@ void	ft_p_conversion(void *ptr, int *len)
 		i++;
 	}
 	while (i--)
-		ft_prf_putchar(hex_string[i], len);
+		if (ft_prf_putchar(hex_string[i], len) == -1)
+			return (-1);
+	return (0);
 }
 
-void	ft_u_conversion(unsigned int n, int *len)
+int	ft_u_conversion(unsigned int n, int *len)
 {
 	if (!n)
-		ft_prf_putchar('0', len);
+		return (ft_prf_putchar('0', len));
 	else
-		ft_prf_putnbr_1(n, len);
+		return (ft_prf_putnbr_1(n, len));
 }
