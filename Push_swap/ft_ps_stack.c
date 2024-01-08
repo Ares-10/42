@@ -20,8 +20,8 @@ void	ft_ps_swap(t_list **stack, int flag)
 	temp_ptr1 = *stack;
 	temp_ptr2 = (*stack)->next;
 	*stack = (*stack)->next->next;
-	ft_lstadd_front(stack, temp_ptr2);
 	ft_lstadd_front(stack, temp_ptr1);
+	ft_lstadd_front(stack, temp_ptr2);
 	if (flag == 1)
 		ft_putstr_fd("sa\n", 1);
 	else
@@ -32,20 +32,14 @@ void	ft_ps_push(t_list **stack_a, t_list **stack_b, int flag)
 {
 	t_list	*temp_ptr;
 
+	temp_ptr = (*stack_b)->next;
+	(*stack_b)->next = NULL;
+	ft_lstadd_front(stack_a, *stack_b);
+	*stack_b = temp_ptr;
 	if (flag == 1)
-	{
-		temp_ptr = (*stack_a)->next;
-		ft_lstadd_front(stack_b, *stack_a);
-		*stack_a = temp_ptr;
 		ft_putstr_fd("pa\n", 1);
-	}
 	else
-	{
-		temp_ptr = (*stack_b)->next;
-		ft_lstadd_front(stack_a, *stack_b);
-		*stack_b = temp_ptr;
 		ft_putstr_fd("pb\n", 1);
-	}
 }
 
 void	ft_ps_rotate(t_list **stack, int flag)
@@ -54,6 +48,7 @@ void	ft_ps_rotate(t_list **stack, int flag)
 	
 	temp_ptr = *stack;
 	*stack = (*stack)->next;
+	temp_ptr->next = NULL;
 	ft_lstadd_back(stack, temp_ptr);
 	if (flag == 1)
 		ft_putstr_fd("ra\n", 1);
@@ -64,9 +59,15 @@ void	ft_ps_rotate(t_list **stack, int flag)
 void	ft_ps_rrotate(t_list **stack, int flag)
 {
 	t_list	*temp_node;
+	t_list	*temp_ptr;
 	
-	temp_node = ft_lstnew(ft_lstlast(*stack)->content);
-	ft_lstdelone(ft_lstlast(*stack), 0);
+	temp_node = *stack;
+	while (temp_node->next)
+	{
+		temp_ptr = temp_node;
+		temp_node = temp_node->next;
+	}
+	temp_ptr->next = NULL;
 	ft_lstadd_front(stack, temp_node);
 	if (flag == 1)
 		ft_putstr_fd("rra\n", 1);
