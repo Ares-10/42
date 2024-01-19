@@ -6,19 +6,19 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:55:54 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/01/08 23:54:07 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/01/19 17:11:50 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_ps_puterr(void)
+int	ps_puterr(void)
 {
 	ft_putstr_fd("ERROR\n", 2);
 	return (ERROR);
 }
 
-int	ft_ps_check_arg(int argc, char **argv)
+int	ps_check_arg(int argc, char **argv)
 {
 	int	check_num[argc];
 	int	i;
@@ -32,40 +32,42 @@ int	ft_ps_check_arg(int argc, char **argv)
 	{
 		n = ft_atoi(argv[i]);
 		if (n <= 0)
-			return (ft_ps_puterr());
+			return (ps_puterr());
 		check_num[n] = SUCCESS;
 	}
 	i = 0;
 	while (++ i < argc)
 		if (check_num[i] == ERROR)
-			return (ft_ps_puterr());
+			return (ps_puterr());
 	return (SUCCESS);
 }
 
+int	main(int argc, char **argv)
+{
+	t_deque	**stack_a;
+	t_deque	**stack_b;
+
+	if (ps_check_arg(argc, argv) == ERROR || argc < 2)
+		return (0);
+	ps_init(stack_a, stack_b, argc, argv);
+	ps_sort(argc - 1, stack_a, stack_b);
+	test_print(*stack_a, *stack_b);
+}
+
 #include <stdio.h>
-void print_stack(t_list *stack_a, t_list *stack_b, int a, int b)
+void test_print(t_deque *stack_a, t_deque *stack_b)
 {
 	printf("\nstack_a\n");
 	while (stack_a)
 	{
-		printf("%d\n", *(int *)(stack_a->content));
+		printf("%d\n", stack_a->num);
 		stack_a = stack_a->next;
 	}
 	printf("stack_b\n");
 	while (stack_b)
 	{
-		printf("%d\n", *(int *)(stack_b->content));
+		printf("%d\n", stack_b->num);
 		stack_b = stack_b->next;
 	}
 	printf("\n\n");
-}
-
-int	main(int argc, char **argv)
-{
-	t_list	**stack_a;
-	t_list	**stack_b;
-
-	if (ft_ps_check_arg(argc, argv) == ERROR || argc < 2)
-		return (0);
-	ft_ps_init(stack_a, argc, argv);
 }
