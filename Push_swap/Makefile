@@ -3,29 +3,28 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+         #
+#    By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 19:27:01 by hyungcho          #+#    #+#              #
-#    Updated: 2023/12/19 20:13:46 by hyungcho         ###   ########.fr        #
+#    Updated: 2024/01/19 19:34:27 by johyeongeun      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = push_swap
 
-SRCS = ft_printf.c ft_printf_utils.c
+SRCS = ps_algorithm_1.c ps_algorithm_2.c ps_func_1.c ps_func_2.c ps_utils_1.c ps_utils_2.c push_swap.c
 
 OBJS = $(SRCS:.c=.o)
 
 CFLAGS = -c -Wall -Wextra -Werror
 
-
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	ar -rcs $@ $^
+	cc -o $@ $^ libft.a
 
 %.o: %.c
-	cc $(CFLAGS) $< -o $@ -I ft_printf.h
+	cc $(CFLAGS) $< -o $@ -I push_swap.h -I libft.h -I ps_utils.h
 
 clean :
 	rm -rf $(OBJS)
