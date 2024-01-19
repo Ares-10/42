@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 21:53:38 by hyungcho          #+#    #+#             */
-/*   Updated: 2023/12/22 15:48:12 by hyungcho         ###   ########.fr       */
+/*   Updated: 2024/01/20 01:52:34 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_printf(const char *str, ...)
 	while (*str)
 	{
 		if (*str != '%')
-		{	
+		{
 			if (ft_prf_putchar(*str, &len) == -1)
 				return (-1);
 		}
