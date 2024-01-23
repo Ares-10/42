@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:55:54 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/01/19 19:37:51 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/01/22 19:12:24 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,30 +44,13 @@ int	ps_check_arg(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_deque	**stack_a;
-	t_deque	**stack_b;
+	t_deque	*stack_a;
+	t_deque	*stack_b;
 
+	stack_a = NULL;
+	stack_b = NULL;
 	if (ps_check_arg(argc, argv) == ERROR || argc < 2)
 		return (0);
-	ps_init(stack_a, stack_b, argc, argv);
-	ps_sort(argc - 1, stack_a, stack_b);
-	test_print(*stack_a, *stack_b);
-}
-
-#include <stdio.h>
-void test_print(t_deque *stack_a, t_deque *stack_b)
-{
-	printf("\nstack_a\n");
-	while (stack_a)
-	{
-		printf("%d\n", stack_a->num);
-		stack_a = stack_a->next;
-	}
-	printf("stack_b\n");
-	while (stack_b)
-	{
-		printf("%d\n", stack_b->num);
-		stack_b = stack_b->next;
-	}
-	printf("\n\n");
+	ps_init(&stack_a, &stack_b, argc, argv);
+	ps_sort(argc - 1, &stack_a, &stack_b);
 }

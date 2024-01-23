@@ -1,0 +1,18 @@
+
+#include <stdio.h>
+void test_print(t_deque *stack_a, t_deque *stack_b)
+{
+	printf("\nstack_a\n");
+	while (stack_a)
+	{
+		printf("%d\n", stack_a->num);
+		stack_a = stack_a->next;
+	}
+	printf("stack_b\n");
+	while (stack_b)
+	{
+		printf("%d\n", stack_b->num);
+		stack_b = stack_b->next;
+	}
+	printf("\n\n");
+}

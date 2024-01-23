@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:55:44 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/01/19 18:23:02 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/01/23 16:34:40 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # define MAX(a, b) a > b ? a : b
 
 # include <stdlib.h>
-# include "libft.h"
 
 typedef struct s_deque
 {
@@ -43,8 +42,10 @@ void	ps_sort(int size, t_deque **stack_a, t_deque **stack_b);
 int		ps_lstsize(t_deque *lst);
 int		ps_lstget(int index, t_deque *lst);
 
-/* test */
-void test_print(t_deque *stack_a, t_deque *stack_b);
+/* libft_func */
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putnbr_fd(int n, int fd);
+int		ft_atoi(const char *str);
 
 
 #endif

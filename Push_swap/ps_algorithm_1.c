@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:11:40 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/01/19 19:15:50 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/01/22 18:50:33 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ void	ps_sort(int size, t_deque **stack_a, t_deque **stack_b)
 	while (*stack_b)
 	{
 		pull_idx = ps_check_best(stack_a, stack_b);
-		test_print(*stack_a, *stack_b);
 		ps_push_best(pull_idx, stack_a, stack_b);
 	}
 	while ((*stack_a)->num != 1)
