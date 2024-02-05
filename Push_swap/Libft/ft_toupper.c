@@ -1,13 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_algorithm_2.c                                   :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 19:12:48 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/01/23 18:28:47 by johyeongeun      ###   ########.fr       */
+/*   Created: 2023/10/10 16:33:51 by hyungcho          #+#    #+#             */
+/*   Updated: 2023/10/10 16:39:41 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+int	ft_toupper(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		c += - 'a' + 'A';
+	return (c);
+}

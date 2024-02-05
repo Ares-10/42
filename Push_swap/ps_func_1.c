@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ps_(*stack).c                                      :+:      :+:    :+:   */
+/*   ps_func_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/07 19:30:11 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/01/07 20:45:54 by johyeongeun      ###   ########.fr       */
+/*   Created: 2024/01/23 19:00:55 by johyeongeun       #+#    #+#             */
+/*   Updated: 2024/02/05 16:08:18 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ps_push(t_deque **stack_1, t_deque **stack_2, int flag)
 void	ps_rotate(t_deque **stack, int flag)
 {
 	t_deque	*temp_ptr;
-	
+
 	if (!(*stack) || !((*stack)->next))
 		return ;
 	temp_ptr = *stack;
@@ -67,7 +67,7 @@ void	ps_rrotate(t_deque **stack, int flag)
 {
 	t_deque	*temp_node;
 	t_deque	*temp_ptr;
-	
+
 	if (!(*stack) || !((*stack)->next))
 		return ;
 	temp_node = *stack;
@@ -84,16 +84,21 @@ void	ps_rrotate(t_deque **stack, int flag)
 		ft_putstr_fd("rrb\n", 1);
 }
 
-void	ps_init(t_deque **stack_a, t_deque **stack_b, int argc, char **argv)
+void	ps_init(t_deque **stack_a, t_deque **stack_b, int argc, int *num_arr)
 {
 	int	i;
+	int	j;
 	int	content;
 
 	*stack_b = NULL;
 	i = 0;
 	while (++i < argc)
 	{
-		content = ft_atoi(argv[i]);
+		content = 0;
+		j = 0;
+		while (++j < argc)
+			if (num_arr[j] < num_arr[i])
+				content++;
 		ps_lstadd_back(stack_a, ps_lstnew(content));
 	}
 }

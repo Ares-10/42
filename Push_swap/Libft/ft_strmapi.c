@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_utils_2.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 21:41:21 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/05 20:19:58 by johyeongeun      ###   ########.fr       */
+/*   Created: 2023/10/26 18:40:13 by hyungcho          #+#    #+#             */
+/*   Updated: 2023/10/28 20:56:25 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps_utils.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int	ps_lstsize(t_deque *lst)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int	count;
+	char			*str;
+	unsigned int	i;
 
-	if (!lst)
+	i = 0;
+	str = (char *)malloc(ft_strlen(s) + 1);
+	if (!str)
 		return (0);
-	count = 1;
-	while (lst->next)
+	while (s[i])
 	{
-		lst = lst->next;
-		count++;
+		str[i] = f(i, s[i]);
+		i++;
 	}
-	return (count);
-}
-
-int	ps_lstget(int index, t_deque *lst)
-{
-	while (lst && index--)
-		lst = lst->next;
-	return (lst->num);
+	str[i] = '\0';
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:38:37 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/01/19 18:05:00 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/05 20:04:22 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ps_lstadd_back(t_deque **lst, t_deque *new)
 	{
 		lst_p = ps_lstlast(*lst);
 		lst_p->next = new;
+		new->prev = lst_p;
 	}
 }
 
@@ -31,6 +32,7 @@ void	ps_lstadd_front(t_deque **lst, t_deque *new)
 		*lst = new;
 	else
 	{
+		(*lst)->prev = new;
 		new->next = *lst;
 		*lst = new;
 	}
