@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:55:54 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/06 04:44:49 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/06 22:04:07 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	main(int argc, char **argv)
 
 	num_arr = (int *)malloc(sizeof(int) * argc);
 	if (!num_arr)
-		return (0);
+		return (ps_puterr());
 	stack_a = NULL;
 	stack_b = NULL;
 	if (ps_check_arg(num_arr, argc, argv) == ERROR || argc < 2)
@@ -93,7 +93,7 @@ int	main(int argc, char **argv)
 	free(num_arr);
 	num_arr = (int *)malloc(sizeof(int) * 4);
 	if (!num_arr)
-		return (0);
+		return (ps_puterr());
 	ps_sort(num_arr, &stack_a, &stack_b);
 	free(num_arr);
 }

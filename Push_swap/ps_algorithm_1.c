@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:11:40 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/06 18:50:24 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/06 21:02:38 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	ps_sort(int *check_best, t_deque **stack_a, t_deque **stack_b)
 		ps_short_sort(stack_a, stack_b);
 		return ;
 	}
-	ps_lstmoveall(stack_a, stack_b);
+	ps_lstmove_atob(stack_a, stack_b, 0);
 	while (*stack_b)
 	{
 		ps_check_best(check_best, *stack_a, *stack_b);
@@ -101,6 +101,10 @@ void	ps_sort(int *check_best, t_deque **stack_a, t_deque **stack_b)
 		else if (check_best[1] == A_L_B_L)
 			action_a_l_b_l(check_best, stack_a, stack_b);
 	}
-	while ((*stack_a)->num > ps_lstlast(*stack_a)->num)
-		ps_rotate(stack_a, 1);
+	if ((*stack_a)->num > ps_lstlast(*stack_a)->num / 2)
+		while ((*stack_a)->num > ps_lstlast(*stack_a)->num)
+			ps_rotate(stack_a, 1);
+	else
+		while ((*stack_a)->num > ps_lstlast(*stack_a)->num)
+			ps_rrotate(stack_a, 1);
 }
