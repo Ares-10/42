@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:55:44 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/05 21:56:51 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/06 18:44:30 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ps_lstmoveall(t_deque **stack_a, t_deque **stack_b);
 void	ps_sort(int *arr, t_deque **stack_a, t_deque **stack_b);
 int		ps_getpushpos(int pull_num, t_deque *lst);
 int		ps_issorted(t_deque *stack);
+void	ps_short_sort(t_deque **stack_a, t_deque **stack_b);
 
 void	ps_check_best(int *check_best, t_deque *stack_a, t_deque *stack_b);
 

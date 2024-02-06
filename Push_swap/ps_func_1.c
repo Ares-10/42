@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 19:00:55 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/05 16:08:18 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/06 04:49:31 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ps_swap(t_deque **stack, int flag)
 	t_deque	*temp_ptr1;
 	t_deque	*temp_ptr2;
 
-	if (!(*stack) || !((*stack)->next) || !((*stack)->next->next))
+	if (!(*stack) || !((*stack)->next))
 		return ;
 	temp_ptr1 = *stack;
 	temp_ptr2 = (*stack)->next;

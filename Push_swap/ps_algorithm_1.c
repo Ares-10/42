@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:11:40 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/05 21:56:06 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/06 18:50:24 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,11 @@ static void	action_a_l_b_l(int *action, t_deque **stack_a, t_deque **stack_b)
 
 void	ps_sort(int *check_best, t_deque **stack_a, t_deque **stack_b)
 {
+	if (ps_lstsize(*stack_a) <= 5)
+	{
+		ps_short_sort(stack_a, stack_b);
+		return ;
+	}
 	ps_lstmoveall(stack_a, stack_b);
 	while (*stack_b)
 	{
