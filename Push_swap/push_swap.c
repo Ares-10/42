@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:55:54 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/06 22:04:07 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/09 18:56:31 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	ps_puterr(void)
 {
-	ft_putstr_fd("ERROR\n", 2);
-	return (ERROR);
+	ft_putstr_fd("Error\n", 2);
+	exit(EXIT_FAILURE);
 }
 
 static long	ps_atol(const char *str)
@@ -25,26 +25,26 @@ static long	ps_atol(const char *str)
 
 	is_n = 0;
 	n = 0;
-	while (*str && (*str == ' ' || (*str >= 9 && *str <= 13)))
-		str++;
 	if (*str && (*str == '-' || *str == '+'))
 		if (*str++ == '-')
 			is_n++;
-	if (*str && *str == '0' && *(str + 1))
-		return ((long)INT32_MAX + 1);
+	if (!*str || !ft_isdigit(*str))
+		ps_puterr();
+	if (*str == '0' && *(str + 1) != '\0')
+		ps_puterr();
 	while (*str && ft_isdigit(*str))
 	{
 		n = n * 10 + *str - '0';
 		str++;
 	}
-	if (*str)
-		return ((long)INT32_MAX + 1);
+	if (*str != '\0')
+		ps_puterr();
 	if (is_n % 2 == 1)
 		return (-n);
 	return (n);
 }
 
-static int	ps_check_arg(int *check_num, int argc, char **argv)
+static void	ps_check_arg(int *check_num, int argc, char **argv)
 {
 	int		i;
 	int		j;
@@ -55,7 +55,7 @@ static int	ps_check_arg(int *check_num, int argc, char **argv)
 	{
 		num = ps_atol(argv[i]);
 		if (num < INT32_MIN || num > INT32_MAX)
-			return (ps_puterr());
+			ps_puterr();
 		check_num[i] = (int)num;
 	}
 	i = 0;
@@ -64,13 +64,26 @@ static int	ps_check_arg(int *check_num, int argc, char **argv)
 		j = i;
 		while (++j < argc)
 			if (check_num[j] == check_num[i])
-				return (ps_puterr());
+				ps_puterr();
 	}
-	i = 0;
-	while (++i < argc - 1)
-		if (check_num[i] > check_num[i + 1])
-			return (SUCCESS);
-	return (ERROR);
+}
+
+static int	ps_split(char ***strs)
+{
+	int		count;
+
+	(*strs)[1] = ft_strjoin("push_swap ", (*strs)[1]);
+	if (!(*strs)[1])
+		ps_puterr();
+	*strs = ft_split((*strs)[1], ' ');
+	if (!(*strs))
+		ps_puterr();
+	count = 0;
+	while ((*strs)[count])
+		count++;
+	if (count < 2)
+		exit(0);
+	return (count);
 }
 
 int	main(int argc, char **argv)
@@ -79,21 +92,23 @@ int	main(int argc, char **argv)
 	t_deque	*stack_b;
 	int		*num_arr;
 
+	if (argc < 2)
+		exit(0);
 	num_arr = (int *)malloc(sizeof(int) * argc);
 	if (!num_arr)
-		return (ps_puterr());
+		ps_puterr();
 	stack_a = NULL;
 	stack_b = NULL;
-	if (ps_check_arg(num_arr, argc, argv) == ERROR || argc < 2)
-	{
-		free(num_arr);
-		return (0);
-	}
+	if (argc == 2)
+		argc = ps_split(&argv);
+	ps_check_arg(num_arr, argc, argv);
 	ps_init(&stack_a, &stack_b, argc, num_arr);
 	free(num_arr);
+	if (ps_issorted(stack_a))
+		exit(0);
 	num_arr = (int *)malloc(sizeof(int) * 4);
 	if (!num_arr)
-		return (ps_puterr());
+		ps_puterr();
 	ps_sort(num_arr, &stack_a, &stack_b);
-	free(num_arr);
+	exit(0);
 }

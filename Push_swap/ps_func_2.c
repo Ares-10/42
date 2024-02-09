@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:24:09 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/06 22:06:17 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/09 18:47:03 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	ps_issorted(t_deque *stack)
 	{
 		if (prev_num > stack->num)
 			return (0);
+		prev_num = stack->num;
 		stack = stack->next;
 	}
 	return (1);

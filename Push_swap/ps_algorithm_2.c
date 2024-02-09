@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:12:48 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/06 21:00:52 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/09 18:00:54 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ static void	ps_sort_3(t_deque **stack_a)
 
 static void	ps_sort_4(t_deque **stack_a, t_deque **stack_b)
 {
-	while ((*stack_a)->num != 0)
+	while ((*stack_a)->num > (*stack_a)->next->num
+		|| (*stack_a)->num > (*stack_a)->next->next->num
+		|| (*stack_a)->num > (*stack_a)->next->next->next->num)
 		ps_rotate(stack_a, 1);
 	ps_push(stack_b, stack_a, 2);
 	ps_sort_3(stack_a);

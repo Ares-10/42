@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 19:00:55 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/06 04:49:31 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/07 23:06:27 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,22 @@ void	ps_swap(t_deque **stack, int flag)
 
 	if (!(*stack) || !((*stack)->next))
 		return ;
-	temp_ptr1 = *stack;
-	temp_ptr2 = (*stack)->next;
-	*stack = (*stack)->next->next;
-	ps_lstadd_front(stack, temp_ptr1);
-	ps_lstadd_front(stack, temp_ptr2);
+	if (ps_lstsize(*stack) > 2)
+	{
+		temp_ptr1 = *stack;
+		temp_ptr2 = (*stack)->next;
+		*stack = (*stack)->next->next;
+		ps_lstadd_front(stack, temp_ptr1);
+		ps_lstadd_front(stack, temp_ptr2);
+	}
+	else
+	{
+		temp_ptr1 = *stack;
+		(*stack)->next->next = *stack;
+		(*stack)->next->prev = NULL;
+		(*stack)->next->next->prev = (*stack)->next;
+		(*stack)->next->next->next = NULL;
+	}
 	if (flag == 1)
 		ft_putstr_fd("sa\n", 1);
 	else
