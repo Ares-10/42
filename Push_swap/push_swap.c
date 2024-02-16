@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:55:54 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/09 19:28:25 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/16 16:15:28 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,27 +88,27 @@ static int	ps_split(char ***strs)
 
 int	main(int argc, char **argv)
 {
-	t_deque	*stack_a;
-	t_deque	*stack_b;
-	int		*num_arr;
+	t_dlist	*stack_a;
+	t_dlist	*stack_b;
+	int		*int_arr;
 
 	if (argc < 2)
 		exit(0);
-	num_arr = (int *)malloc(sizeof(int) * argc);
-	if (!num_arr)
+	int_arr = (int *)malloc(sizeof(int) * argc);
+	if (!int_arr)
 		ps_puterr();
 	stack_a = NULL;
 	stack_b = NULL;
 	if (argc == 2)
 		argc = ps_split(&argv);
-	ps_check_arg(num_arr, argc, argv);
-	ps_init(&stack_a, &stack_b, argc, num_arr);
-	free(num_arr);
+	ps_check_arg(int_arr, argc, argv);
+	ps_init(&stack_a, &stack_b, argc, int_arr);
+	free(int_arr);
 	if (ps_issorted(stack_a))
 		exit(0);
-	num_arr = (int *)malloc(sizeof(int) * 4);
-	if (!num_arr)
+	int_arr = (int *)malloc(sizeof(int) * 4);
+	if (!int_arr)
 		ps_puterr();
-	ps_sort(num_arr, &stack_a, &stack_b);
+	ps_sort(int_arr, &stack_a, &stack_b);
 	exit(0);
 }

@@ -6,15 +6,15 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:38:37 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/07 23:04:56 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/16 16:15:28 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps_utils.h"
 
-void	ps_lstadd_back(t_deque **lst, t_deque *new)
+void	ps_lstadd_back(t_dlist **lst, t_dlist *new)
 {
-	t_deque	*lst_p;
+	t_dlist	*lst_p;
 
 	if (*lst == 0)
 		*lst = new;
@@ -27,7 +27,7 @@ void	ps_lstadd_back(t_deque **lst, t_deque *new)
 	}
 }
 
-void	ps_lstadd_front(t_deque **lst, t_deque *new)
+void	ps_lstadd_front(t_dlist **lst, t_dlist *new)
 {
 	if (*lst == 0)
 		*lst = new;
@@ -39,7 +39,7 @@ void	ps_lstadd_front(t_deque **lst, t_deque *new)
 	}
 }
 
-t_deque	*ps_lstlast(t_deque *lst)
+t_dlist	*ps_lstlast(t_dlist *lst)
 {
 	if (!lst)
 		return (lst);
@@ -48,11 +48,11 @@ t_deque	*ps_lstlast(t_deque *lst)
 	return (lst);
 }
 
-t_deque	*ps_lstnew(int content)
+t_dlist	*ps_lstnew(int content)
 {
-	t_deque	*node;
+	t_dlist	*node;
 
-	node = (t_deque *)malloc(sizeof(t_deque));
+	node = (t_dlist *)malloc(sizeof(t_dlist));
 	if (!node)
 		return (0);
 	node->num = content;
@@ -61,9 +61,9 @@ t_deque	*ps_lstnew(int content)
 	return (node);
 }
 
-void	ps_lstclear(t_deque **lst)
+void	ps_lstclear(t_dlist **lst)
 {
-	t_deque	*tmp;
+	t_dlist	*tmp;
 
 	while (lst && *lst)
 	{

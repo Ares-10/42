@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:55:30 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/07 23:11:55 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/16 16:15:28 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	count_func(int a_pos, int b_pos, int a_size, int b_size)
 	return (minimum);
 }
 
-void	ps_check_best(int *check_best, t_deque *stack_a, t_deque *stack_b)
+void	ps_check_best(int *check_best, t_dlist *stack_a, t_dlist *stack_b)
 {
 	int	a_pos;
 	int	b_pos;

@@ -6,28 +6,28 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:24:09 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/09 18:47:03 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/16 16:20:13 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "ps_utils.h"
 
-void	ps_rr(t_deque **stack_a, t_deque **stack_b)
+void	ps_rr(t_dlist **stack_a, t_dlist **stack_b)
 {
 	ps_rotate(stack_a, 0);
 	ps_rotate(stack_b, 0);
 	ft_putstr_fd("rr\n", 1);
 }
 
-void	ps_rrr(t_deque **stack_a, t_deque **stack_b)
+void	ps_rrr(t_dlist **stack_a, t_dlist **stack_b)
 {
-	ps_rrotate(stack_a, 0);
-	ps_rrotate(stack_b, 0);
+	ps_reverse_rotate(stack_a, 0);
+	ps_reverse_rotate(stack_b, 0);
 	ft_putstr_fd("rrr\n", 1);
 }
 
-int	ps_getpushpos(int pull_num, t_deque *lst)
+int	ps_getpushpos(int pull_num, t_dlist *lst)
 {
 	int	push_pos;
 
@@ -50,7 +50,7 @@ int	ps_getpushpos(int pull_num, t_deque *lst)
 	return (push_pos);
 }
 
-void	ps_lstmove_atob(t_deque **stack_a, t_deque **stack_b, int n)
+void	ps_lstmove_atob(t_dlist **stack_a, t_dlist **stack_b, int n)
 {
 	int	a_size;
 	int	m;
@@ -77,7 +77,7 @@ void	ps_lstmove_atob(t_deque **stack_a, t_deque **stack_b, int n)
 	ps_lstmove_atob(stack_a, stack_b, n + m * 2);
 }
 
-int	ps_issorted(t_deque *stack)
+int	ps_issorted(t_dlist *stack)
 {
 	int	prev_num;
 

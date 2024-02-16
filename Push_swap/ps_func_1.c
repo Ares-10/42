@@ -6,17 +6,17 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 19:00:55 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/07 23:06:27 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/16 16:20:13 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "ps_utils.h"
 
-void	ps_swap(t_deque **stack, int flag)
+void	ps_swap(t_dlist **stack, int flag)
 {
-	t_deque	*temp_ptr1;
-	t_deque	*temp_ptr2;
+	t_dlist	*temp_ptr1;
+	t_dlist	*temp_ptr2;
 
 	if (!(*stack) || !((*stack)->next))
 		return ;
@@ -42,9 +42,9 @@ void	ps_swap(t_deque **stack, int flag)
 		ft_putstr_fd("sb\n", 1);
 }
 
-void	ps_push(t_deque **stack_1, t_deque **stack_2, int flag)
+void	ps_push(t_dlist **stack_1, t_dlist **stack_2, int flag)
 {
-	t_deque	*temp_ptr;
+	t_dlist	*temp_ptr;
 
 	if (!(*stack_2))
 		return ;
@@ -58,9 +58,9 @@ void	ps_push(t_deque **stack_1, t_deque **stack_2, int flag)
 		ft_putstr_fd("pb\n", 1);
 }
 
-void	ps_rotate(t_deque **stack, int flag)
+void	ps_rotate(t_dlist **stack, int flag)
 {
-	t_deque	*temp_ptr;
+	t_dlist	*temp_ptr;
 
 	if (!(*stack) || !((*stack)->next))
 		return ;
@@ -74,10 +74,10 @@ void	ps_rotate(t_deque **stack, int flag)
 		ft_putstr_fd("rb\n", 1);
 }
 
-void	ps_rrotate(t_deque **stack, int flag)
+void	ps_reverse_rotate(t_dlist **stack, int flag)
 {
-	t_deque	*temp_node;
-	t_deque	*temp_ptr;
+	t_dlist	*temp_node;
+	t_dlist	*temp_ptr;
 
 	if (!(*stack) || !((*stack)->next))
 		return ;
@@ -95,7 +95,7 @@ void	ps_rrotate(t_deque **stack, int flag)
 		ft_putstr_fd("rrb\n", 1);
 }
 
-void	ps_init(t_deque **stack_a, t_deque **stack_b, int argc, int *num_arr)
+void	ps_init(t_dlist **stack_a, t_dlist **stack_b, int argc, int *num_arr)
 {
 	int	i;
 	int	j;

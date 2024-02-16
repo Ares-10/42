@@ -6,13 +6,13 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:41:21 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/05 20:19:58 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/16 16:15:28 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps_utils.h"
 
-int	ps_lstsize(t_deque *lst)
+int	ps_lstsize(t_dlist *lst)
 {
 	int	count;
 
@@ -27,7 +27,7 @@ int	ps_lstsize(t_deque *lst)
 	return (count);
 }
 
-int	ps_lstget(int index, t_deque *lst)
+int	ps_lstget(int index, t_dlist *lst)
 {
 	while (lst && index--)
 		lst = lst->next;

@@ -6,13 +6,13 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:12:48 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/09 18:00:54 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/16 16:20:13 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ps_sort_3(t_deque **stack_a)
+static void	ps_sort_3(t_dlist **stack_a)
 {
 	int	a;
 	int	b;
@@ -22,7 +22,7 @@ static void	ps_sort_3(t_deque **stack_a)
 	b = (*stack_a)->next->num;
 	c = (*stack_a)->next->next->num;
 	if (c < a && a < b)
-		ps_rrotate(stack_a, 1);
+		ps_reverse_rotate(stack_a, 1);
 	else if (b < a && a < c)
 		ps_swap(stack_a, 1);
 	else if (b < c && c < a)
@@ -34,12 +34,12 @@ static void	ps_sort_3(t_deque **stack_a)
 	}
 	else if (a < c && c < b)
 	{
-		ps_rrotate(stack_a, 1);
+		ps_reverse_rotate(stack_a, 1);
 		ps_swap(stack_a, 1);
 	}
 }
 
-static void	ps_sort_4(t_deque **stack_a, t_deque **stack_b)
+static void	ps_sort_4(t_dlist **stack_a, t_dlist **stack_b)
 {
 	while ((*stack_a)->num > (*stack_a)->next->num
 		|| (*stack_a)->num > (*stack_a)->next->next->num
@@ -51,7 +51,7 @@ static void	ps_sort_4(t_deque **stack_a, t_deque **stack_b)
 	return ;
 }
 
-static void	ps_sort_5(t_deque **stack_a, t_deque **stack_b)
+static void	ps_sort_5(t_dlist **stack_a, t_dlist **stack_b)
 {
 	int	push_pos;
 
@@ -61,14 +61,14 @@ static void	ps_sort_5(t_deque **stack_a, t_deque **stack_b)
 	push_pos = ps_getpushpos((*stack_b)->num, *stack_a);
 	ps_push(stack_a, stack_b, 1);
 	if (push_pos == 2)
-		ps_rrotate(stack_a, 1);
+		ps_reverse_rotate(stack_a, 1);
 	if (push_pos == 1 || push_pos == 2)
 		ps_swap(stack_a, 1);
 	push_pos = ps_getpushpos((*stack_b)->num, *stack_a);
 	if (push_pos == 2)
 		ps_rotate(stack_a, 1);
 	if (push_pos == 3)
-		ps_rrotate(stack_a, 1);
+		ps_reverse_rotate(stack_a, 1);
 	ps_push(stack_a, stack_b, 1);
 	if (push_pos == 1 || push_pos == 2)
 		ps_swap(stack_a, 1);
@@ -77,10 +77,10 @@ static void	ps_sort_5(t_deque **stack_a, t_deque **stack_b)
 			ps_rotate(stack_a, 1);
 	else
 		while ((*stack_a)->num > ps_lstlast(*stack_a)->num)
-			ps_rrotate(stack_a, 1);
+			ps_reverse_rotate(stack_a, 1);
 }
 
-void	ps_short_sort(t_deque **stack_a, t_deque **stack_b)
+void	ps_short_sort(t_dlist **stack_a, t_dlist **stack_b)
 {
 	if (ps_lstsize(*stack_a) == 2)
 	{
