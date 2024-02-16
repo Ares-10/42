@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:55:44 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/16 16:28:24 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/16 17:07:55 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_dlist
 }	t_dlist;
 
 /* push_swap_func */
-void	ps_init(t_dlist **stack_a, t_dlist **stack_b, int argc, int *int_arr);
+void	ps_init(t_dlist **stack_a, int argc, int *int_arr);
 void	ps_lstmove_atob(t_dlist **stack_a, t_dlist **stack_b, int n);
 void	ps_sort(int *arr, t_dlist **stack_a, t_dlist **stack_b);
 int		ps_getpushpos(int pull_num, t_dlist *lst);

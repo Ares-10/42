@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:55:54 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/16 16:15:28 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/16 17:08:03 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 		argc = ps_split(&argv);
 	ps_check_arg(int_arr, argc, argv);
-	ps_init(&stack_a, &stack_b, argc, int_arr);
+	ps_init(&stack_a, argc, int_arr);
 	free(int_arr);
 	if (ps_issorted(stack_a))
 		exit(0);

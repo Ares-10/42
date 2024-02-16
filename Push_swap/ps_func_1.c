@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 19:00:55 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/16 16:20:13 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/16 17:07:45 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,12 @@ void	ps_reverse_rotate(t_dlist **stack, int flag)
 		ft_putstr_fd("rrb\n", 1);
 }
 
-void	ps_init(t_dlist **stack_a, t_dlist **stack_b, int argc, int *num_arr)
+void	ps_init(t_dlist **stack_a, int argc, int *num_arr)
 {
 	int	i;
 	int	j;
 	int	content;
 
-	*stack_b = NULL;
 	i = 0;
 	while (++i < argc)
 	{
