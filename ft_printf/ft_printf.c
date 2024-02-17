@@ -6,9 +6,13 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 21:53:38 by hyungcho          #+#    #+#             */
-/*   Updated: 2024/01/20 01:52:34 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/18 00:22:50 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdarg.h>
+#include <unistd.h>
+#include "ft_printf.h"
 
 #include <stdarg.h>
 #include <unistd.h>
@@ -17,7 +21,7 @@
 static int	ft_s_conversion(char *str, int *len);
 static int	ft_p_conversion(void *ptr, int *len);
 static int	ft_u_conversion(unsigned int n, int *len);
-static int	ft_format_conversion(va_list ap, char ch, int *len);
+static int	ft_format_conversion(va_list *ap, char ch, int *len);
 
 int	ft_printf(const char *str, ...)
 {
@@ -36,7 +40,7 @@ int	ft_printf(const char *str, ...)
 				return (-1);
 		}
 		else
-			if (ft_format_conversion(ap, *(++str), &len) == -1)
+			if (ft_format_conversion(&ap, *(++str), &len) == -1)
 				return (-1);
 		str++;
 	}
@@ -44,26 +48,26 @@ int	ft_printf(const char *str, ...)
 	return (len);
 }
 
-int	ft_format_conversion(va_list ap, char ch, int *len)
+int	ft_format_conversion(va_list *ap, char ch, int *len)
 {
 	char	hex_string[10];
 
 	if (ch == 'c')
-		return (ft_prf_putchar(va_arg(ap, int), len));
+		return (ft_prf_putchar(va_arg(*ap, int), len));
 	else if (ch == 's')
-		return (ft_s_conversion(va_arg(ap, char *), len));
+		return (ft_s_conversion(va_arg(*ap, char *), len));
 	else if (ch == 'p')
-		return (ft_p_conversion(va_arg(ap, void *), len));
+		return (ft_p_conversion(va_arg(*ap, void *), len));
 	else if (ch == 'd')
-		return (ft_prf_putnbr(va_arg(ap, int), len));
+		return (ft_prf_putnbr(va_arg(*ap, int), len));
 	else if (ch == 'i')
-		return (ft_prf_putnbr(va_arg(ap, int), len));
+		return (ft_prf_putnbr(va_arg(*ap, int), len));
 	else if (ch == 'u')
-		return (ft_u_conversion(va_arg(ap, unsigned int), len));
+		return (ft_u_conversion(va_arg(*ap, unsigned int), len));
 	else if (ch == 'x')
-		return (ft_prf_itohex(va_arg(ap, int), hex_string, len, 1));
+		return (ft_prf_itohex(va_arg(*ap, int), hex_string, len, 1));
 	else if (ch == 'X')
-		return (ft_prf_itohex(va_arg(ap, int), hex_string, len, 2));
+		return (ft_prf_itohex(va_arg(*ap, int), hex_string, len, 2));
 	else if (ch == '%')
 		return (ft_prf_putchar('%', len));
 	else
