@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:34:32 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/20 08:20:05 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/26 18:09:38 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ static int	key_press(int keycode, t_data *data)
 		mlx_destroy_window(data->mlx, data->win);
 		exit(0);
 	}
-	if (keycode == LEFT)
+	if (keycode == KEY_LEFT || keycode == KEY_A)
 		move_player(data, data->player_xpos - 1, data->player_ypos);
-	if (keycode == RIGHT)
+	if (keycode == KEY_RIGHT || keycode == KEY_D)
 		move_player(data, data->player_xpos + 1, data->player_ypos);
-	if (keycode == UP)
+	if (keycode == KEY_UP || keycode == KEY_W)
 		move_player(data, data->player_xpos, data->player_ypos - 1);
-	if (keycode == DOWN)
+	if (keycode == KEY_DOWN || keycode == KEY_S)
 		move_player(data, data->player_xpos, data->player_ypos + 1);
 	draw(data);
 	return (0);

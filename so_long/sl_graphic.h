@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:47:53 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/20 08:18:20 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/26 18:08:00 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@
 # define KEY_PRESS		2
 # define DESTROY_NOTIFY	17
 # define ESC			53
-# define UP				126
-# define DOWN			125
-# define LEFT			123
-# define RIGHT			124
+# define KEY_W			13
+# define KEY_A			0
+# define KEY_S			1
+# define KEY_D			2
+# define KEY_UP				126
+# define KEY_DOWN			125
+# define KEY_LEFT			123
+# define KEY_RIGHT			124
 
 typedef struct s_data
 {
