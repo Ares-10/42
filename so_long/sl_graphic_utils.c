@@ -6,41 +6,42 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 18:27:24 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/20 08:15:37 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/27 21:57:02 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sl_graphic.h"
 #include "so_long.h"
 
-void	draw_block(t_data *data, int x, int y, int color)
+void	draw_block(t_data *data, int x, int y, void *img)
 {
-	int	i;
-	int	j;
-	int	block_wide;
-	int	block_height;
-
-	block_wide = data->win_width / data->map_width;
-	block_height = data->win_height / data->map_heigth;
-	i = -1;
-	while (++i < block_height)
-	{
-		j = -1;
-		while (++j < block_wide)
-			my_mlx_pixel_put(data,
-				j + x * block_wide, i + y * block_height, color);
-	}
+	mlx_put_image_to_window(data->mlx, data->win, img, x * 32, y * 32);
 }
 
-void	move_player(t_data *data, int x, int y)
+int	close_callback(void)
 {
-	if (data->map[y][x] == '1')
-		return ;
-	data->move_count++;
-	data->map[y][x] = 'P';
-	data->map[data->player_ypos][data->player_xpos] = '0';
-	data->player_xpos = x;
-	data->player_ypos = y;
+	exit(0);
+	return (0);
+}
+
+void	init_images(t_data *data)
+{
+	int	img_width;
+	int	img_height;
+
+	data->images.img_0 = mlx_xpm_file_to_image(data->mlx,
+			"./images/skull_a.xpm", &img_width, &img_height);
+	data->images.img_1 = mlx_xpm_file_to_image(data->mlx,
+			"./images/gift.xpm", &img_width, &img_height);
+	data->images.img_p = mlx_xpm_file_to_image(data->mlx,
+			"./images/skull_b.xpm", &img_width, &img_height);
+	data->images.img_c = mlx_xpm_file_to_image(data->mlx,
+			"./images/crystal.xpm", &img_width, &img_height);
+	data->images.img_e = mlx_xpm_file_to_image(data->mlx,
+			"./images/key.xpm", &img_width, &img_height);
+	if (!data->images.img_0 || !data->images.img_1 || !data->images.img_p
+		|| !data->images.img_c || !data->images.img_e)
+		error();
 }
 
 void	init_data(t_data *data, char **map)
@@ -61,10 +62,7 @@ void	init_data(t_data *data, char **map)
 			}
 		}
 	}
-	data->win_width = 0;
-	data->win_height = 0;
-	while (data->win_width < 960 - data->map_width)
-		data->win_width += data->map_width;
-	while (data->win_height < 540 - data->map_heigth)
-		data->win_height += data->map_heigth;
+	data->win_width = 32 * data->map_width;
+	data->win_height = 32 * data->map_heigth;
+	init_images(data);
 }

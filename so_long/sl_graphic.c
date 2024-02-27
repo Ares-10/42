@@ -6,20 +6,12 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:34:32 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/26 18:09:38 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/27 22:11:26 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sl_graphic.h"
 #include "so_long.h"
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bpp / 8));
-	*(unsigned int *)dst = color;
-}
 
 static int	draw(t_data *data)
 {
@@ -33,43 +25,64 @@ static int	draw(t_data *data)
 		while (++xpos < data->map_width)
 		{
 			if (data->map[ypos][xpos] == '1')
-				draw_block(data, xpos, ypos, 0x00FF000);
+				draw_block(data, xpos, ypos, data->images.img_1);
 			if (data->map[ypos][xpos] == '0')
-				draw_block(data, xpos, ypos, 0x00FFFF00);
+				draw_block(data, xpos, ypos, data->images.img_0);
 			if (data->map[ypos][xpos] == 'P')
-				draw_block(data, xpos, ypos, 0x00FF00FF);
+				draw_block(data, xpos, ypos, data->images.img_p);
 			if (data->map[ypos][xpos] == 'E')
-				draw_block(data, xpos, ypos, 0x000000FF);
+				draw_block(data, xpos, ypos, data->images.img_e);
 			if (data->map[ypos][xpos] == 'C')
-				draw_block(data, xpos, ypos, 0x0000FFFF);
+				draw_block(data, xpos, ypos, data->images.img_c);
 		}
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	return (0);
+}
+
+static void	move_player(int keycode, t_data *data)
+{
+	int	x;
+	int	y;
+
+	x = data->player_xpos;
+	y = data->player_ypos;
+	data->move_count++;
+	if (keycode == KEY_LEFT || keycode == KEY_A)
+		x--;
+	else if (keycode == KEY_RIGHT || keycode == KEY_D)
+		x++;
+	else if (keycode == KEY_UP || keycode == KEY_W)
+		y--;
+	else if (keycode == KEY_DOWN || keycode == KEY_S)
+		y++;
+	else
+		data->move_count--;
+	if (data->map[y][x] == '1')
+		return ;
+	data->map[y][x] = 'P';
+	data->map[data->player_ypos][data->player_xpos] = '0';
+	data->player_xpos = x;
+	data->player_ypos = y;
 }
 
 static int	key_press(int keycode, t_data *data)
 {
+	int	move_count;
+
+	move_count = data->move_count;
 	if (keycode == ESC)
 	{
 		mlx_destroy_window(data->mlx, data->win);
 		exit(0);
 	}
-	if (keycode == KEY_LEFT || keycode == KEY_A)
-		move_player(data, data->player_xpos - 1, data->player_ypos);
-	if (keycode == KEY_RIGHT || keycode == KEY_D)
-		move_player(data, data->player_xpos + 1, data->player_ypos);
-	if (keycode == KEY_UP || keycode == KEY_W)
-		move_player(data, data->player_xpos, data->player_ypos - 1);
-	if (keycode == KEY_DOWN || keycode == KEY_S)
-		move_player(data, data->player_xpos, data->player_ypos + 1);
+	move_player(keycode, data);
 	draw(data);
-	return (0);
-}
-
-static int	close_callback(void)
-{
-	exit(0);
+	if (data->move_count != move_count)
+	{
+		ft_putstr_fd("move count: ", 1);
+		ft_putnbr_fd(data->move_count, 1);
+		ft_putendl_fd("", 1);
+	}
 	return (0);
 }
 
@@ -84,8 +97,6 @@ void	start_grapic(char **map)
 	data.addr = mlx_get_data_addr(data.img,
 			&data.bpp, &data.line_length, &data.endian);
 	draw(&data);
-	mlx_put_image_to_window(data.mlx, data.win, data.img, 0, 0);
-
 	mlx_hook(data.win, KEY_PRESS, 0, key_press, &data);
 	mlx_hook(data.win, DESTROY_NOTIFY, 0, close_callback, &data);
 	mlx_loop(data.mlx);
