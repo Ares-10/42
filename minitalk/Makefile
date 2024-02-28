@@ -6,17 +6,18 @@
 #    By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 02:57:16 by johyeongeun       #+#    #+#              #
-#    Updated: 2024/02/28 20:42:52 by johyeongeun      ###   ########.fr        #
+#    Updated: 2024/02/28 20:23:44 by johyeongeun      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minitalk
+NAME = pipex
 
-SRCS = 	minitalk.c 		\
+SRCS = 	pipex.c 		\
 
 OBJS = $(SRCS:.c=.o)
 
-SUBDIRS = Libft			\
+SUBDIRS = 	Libft		\
+			ft_printf	\
 
 CFLAGS = -c -Wall -Wextra -Werror
 
@@ -27,10 +28,10 @@ $(NAME) : $(OBJS)
 	for DIRS in $(SUBDIRS); do	\
 		$(MAKE) -C $$DIRS;		\
 	done
-	cc $^ Libft/libft.a -o $(NAME)
+	cc $^ Libft/libft.a ft_printf/libftprintf.a -o $(NAME)
 
 %.o: %.c
-	cc $(CFLAGS) -c $< -o $@ -I minitalk.h
+	cc $(CFLAGS) -c $< -o $@ -I pipex.h
 
 clean :
 	rm -rf $(OBJS)
