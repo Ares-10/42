@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:47:53 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/27 21:10:00 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/28 19:26:14 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ typedef struct s_data
 	int			move_count;
 	t_images	images;
 }	t_data;
-
-
 
 void	start_grapic(char **map);
 int		close_callback(void);
