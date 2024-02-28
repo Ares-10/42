@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 22:19:27 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/28 19:08:02 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/28 20:48:25 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static void	check_map_validation(char **map)
 		xpos = 0;
 		while (map[ypos][++xpos])
 		{
-			if (map[ypos][xpos] == 'P')
+			if (map[ypos][xpos] == 'P' || map[ypos][xpos] == 'C')
 			{
 				queue = NULL;
 				if (!check_map_bfs(map, &queue, xpos, ypos))

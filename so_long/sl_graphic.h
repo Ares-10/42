@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:47:53 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/28 19:26:14 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/28 20:55:11 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ void	start_grapic(char **map);
 int		close_callback(void);
 void	init_data(t_data *data, char **map);
 void	draw_block(t_data *data, int x, int y, void *img);
+int		count_coin(char **map);
 
 #endif

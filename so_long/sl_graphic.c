@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:34:32 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/27 22:11:26 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/28 20:53:50 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static void	move_player(int keycode, t_data *data)
 		y++;
 	else
 		data->move_count--;
-	if (data->map[y][x] == '1')
+	if (data->map[y][x] == '1'
+		|| (data->map[y][x] == 'E' && count_coin(data->map) != 0))
 		return ;
 	data->map[y][x] = 'P';
 	data->map[data->player_ypos][data->player_xpos] = '0';

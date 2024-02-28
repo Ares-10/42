@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 18:27:24 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/27 21:57:02 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/28 20:54:44 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,24 @@ void	init_data(t_data *data, char **map)
 	data->win_width = 32 * data->map_width;
 	data->win_height = 32 * data->map_heigth;
 	init_images(data);
+}
+
+int	count_coin(char **map)
+{
+	int	i;
+	int	j;
+	int	count_c;
+
+	count_c = 0;
+	i = -1;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j])
+		{
+			if (map[i][j] == 'C')
+				count_c++;
+		}
+	}
+	return (count_c);
 }
