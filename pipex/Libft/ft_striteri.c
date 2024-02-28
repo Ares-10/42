@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/20 02:58:40 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/28 19:38:56 by johyeongeun      ###   ########.fr       */
+/*   Created: 2023/10/26 18:46:22 by hyungcho          #+#    #+#             */
+/*   Updated: 2023/10/28 20:49:13 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	unsigned int	i;
 
-# include "Libft/libft.h"
-# include "ft_printf/ft_printf.h"
-
-
-#endif
+	i = 0;
+	while (s[i])
+	{
+		f(i, s + i);
+		i++;
+	}
+}

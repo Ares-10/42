@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/20 02:58:30 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/28 20:23:09 by johyeongeun      ###   ########.fr       */
+/*   Created: 2023/10/10 17:09:51 by hyungcho          #+#    #+#             */
+/*   Updated: 2023/10/28 20:41:38 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include <string.h>
 
-int	main(int argc, char **argv, char **envp)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int	i;
+	size_t			i;
+	unsigned char	*ptr;
 
-	i = -1;
-	while (envp[++i])
+	i = 0;
+	ptr = (unsigned char *)s;
+	while (i < n)
 	{
-		ft_printf("%s\n", envp[i]);
+		if (ptr[i] == (unsigned char)c)
+			return ((void *)s + i);
+		i++;
 	}
-	ft_printf("\n\n%d %s", argc, *argv);
+	return (0);
 }

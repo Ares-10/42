@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/20 02:58:40 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/28 19:38:56 by johyeongeun      ###   ########.fr       */
+/*   Created: 2023/10/05 19:59:11 by hyungcho          #+#    #+#             */
+/*   Updated: 2023/10/28 20:42:57 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include <string.h>
 
-# include "Libft/libft.h"
-# include "ft_printf/ft_printf.h"
+void	*ft_memset(void *s, int c, size_t n)
+{
+	unsigned char	*ptr;
 
-
-#endif
+	ptr = (unsigned char *)s;
+	while (n--)
+		*(ptr++) = (unsigned char)c;
+	return (s);
+}

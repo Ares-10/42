@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/20 02:58:40 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/28 19:38:56 by johyeongeun      ###   ########.fr       */
+/*   Created: 2023/10/26 23:03:20 by hyungcho          #+#    #+#             */
+/*   Updated: 2023/10/28 20:57:42 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
+#include <stdlib.h>
 
-# include "Libft/libft.h"
-# include "ft_printf/ft_printf.h"
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*node;
 
-
-#endif
+	node = (t_list *)malloc(sizeof(t_list));
+	if (!node)
+		return (0);
+	node->content = content;
+	node->next = 0;
+	return (node);
+}

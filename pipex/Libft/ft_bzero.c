@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/20 02:58:40 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/28 19:38:56 by johyeongeun      ###   ########.fr       */
+/*   Created: 2023/10/05 20:03:49 by hyungcho          #+#    #+#             */
+/*   Updated: 2023/10/28 20:39:09 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include <strings.h>
 
-# include "Libft/libft.h"
-# include "ft_printf/ft_printf.h"
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char	*ptr;
 
-
-#endif
+	ptr = (unsigned char *)s;
+	while (n--)
+		*(ptr++) = 0;
+}
