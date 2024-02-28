@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 22:19:27 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/18 16:28:01 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/02/28 19:08:02 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	check_map_validation(char **map)
 {
 	int		xpos;
 	int		ypos;
-	t_list	**queue;
+	t_list	*queue;
 
 	ypos = 0;
 	while (map[++ypos])
@@ -99,12 +99,10 @@ static void	check_map_validation(char **map)
 		{
 			if (map[ypos][xpos] == 'P')
 			{
-				queue = (t_list **)malloc(sizeof(t_list *));
-				if (!queue)
+				queue = NULL;
+				if (!check_map_bfs(map, &queue, xpos, ypos))
 					error();
-				if (!check_map_bfs(map, queue, xpos, ypos))
-					error();
-				free(queue);
+				ft_lstclear(&queue, free);
 				return ;
 			}
 		}
