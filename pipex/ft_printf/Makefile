@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+         #
+#    By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 19:27:01 by hyungcho          #+#    #+#              #
-#    Updated: 2023/12/19 20:13:46 by hyungcho         ###   ########.fr        #
+#    Updated: 2024/02/28 20:28:31 by johyeongeun      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ $(NAME) : $(OBJS)
 	ar -rcs $@ $^
 
 %.o: %.c
-	cc $(CFLAGS) $< -o $@ -I ft_printf.h
+	cc $(CFLAGS) $< -o $@ -I ft_printf.h -I ft_printf_utils.h
 
 clean :
 	rm -rf $(OBJS)
