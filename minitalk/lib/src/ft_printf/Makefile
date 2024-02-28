@@ -5,19 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/01/20 02:57:16 by johyeongeun       #+#    #+#              #
-#    Updated: 2024/02/28 20:23:44 by johyeongeun      ###   ########.fr        #
+#    Created: 2023/11/12 19:27:01 by hyungcho          #+#    #+#              #
+#    Updated: 2024/02/28 20:28:31 by johyeongeun      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = pipex
+NAME = libftprintf.a
 
-SRCS = 	pipex.c 		\
+SRCS = ft_printf.c ft_printf_utils.c
 
 OBJS = $(SRCS:.c=.o)
-
-SUBDIRS = 	Libft		\
-			ft_printf	\
 
 CFLAGS = -c -Wall -Wextra -Werror
 
@@ -25,19 +22,13 @@ CFLAGS = -c -Wall -Wextra -Werror
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	for DIRS in $(SUBDIRS); do	\
-		$(MAKE) -C $$DIRS;		\
-	done
-	cc $^ Libft/libft.a ft_printf/libftprintf.a -o $(NAME)
+	ar -rcs $@ $^
 
 %.o: %.c
-	cc $(CFLAGS) -c $< -o $@ -I pipex.h
+	cc $(CFLAGS) $< -o $@ -I ft_printf.h -I ft_printf_utils.h
 
 clean :
 	rm -rf $(OBJS)
-	for DIRS in $(SUBDIRS); do		\
-		$(MAKE) -C $$DIRS fclean;	\
-	done
 
 fclean : clean
 	rm -rf $(NAME)
