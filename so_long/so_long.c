@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:56:37 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/03/07 18:28:55 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/03/07 20:22:05 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,17 @@ static char	**get_map(int fd)
 	char	**map;
 	char	*line;
 	char	*new_line;
+	char	*temp;
 
 	new_line = get_next_line(fd);
 	if (!new_line)
 		error();
-	line = "";
+	line = ft_strdup("");
 	while (new_line)
 	{
+		temp = line;
 		line = ft_strjoin(line, new_line);
+		free(temp);
 		new_line = get_next_line(fd);
 	}
 	map = ft_split(line, '\n');

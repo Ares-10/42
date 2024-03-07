@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:34:32 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/03/07 20:04:10 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/03/07 20:25:33 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void	move_player(int keycode, t_data *data)
 
 	x = data->player_xpos;
 	y = data->player_ypos;
-	data->move_count++;
 	if (keycode == KEY_LEFT || keycode == KEY_A)
 		x--;
 	else if (keycode == KEY_RIGHT || keycode == KEY_D)
@@ -56,10 +55,11 @@ static void	move_player(int keycode, t_data *data)
 	else if (keycode == KEY_DOWN || keycode == KEY_S)
 		y++;
 	else
-		data->move_count--;
+		return ;
 	if (data->map[y][x] == '1'
 		|| (data->map[y][x] == 'E' && count_coin(data->map) != 0))
 		return ;
+	data->move_count++;
 	data->map[y][x] = 'P';
 	data->map[data->player_ypos][data->player_xpos] = '0';
 	data->player_xpos = x;
