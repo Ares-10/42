@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 18:27:24 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/28 20:58:11 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/03/07 20:15:52 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,22 @@ int	close_callback(void)
 	exit(0);
 	return (0);
 }
-
+#include<stdio.h>
 void	init_images(t_data *data)
 {
 	int	img_width;
 	int	img_height;
 
 	data->images.img_0 = mlx_xpm_file_to_image(data->mlx,
-			"./images/skull_a.xpm", &img_width, &img_height);
+			"./maps/skull_a.xpm", &img_width, &img_height);
 	data->images.img_1 = mlx_xpm_file_to_image(data->mlx,
-			"./images/gift.xpm", &img_width, &img_height);
+			"./maps/gift.xpm", &img_width, &img_height);
 	data->images.img_p = mlx_xpm_file_to_image(data->mlx,
-			"./images/skull_b.xpm", &img_width, &img_height);
+			"./textures/skull_b.xpm", &img_width, &img_height);
 	data->images.img_c = mlx_xpm_file_to_image(data->mlx,
-			"./images/crystal.xpm", &img_width, &img_height);
+			"./textures/crystal.xpm", &img_width, &img_height);
 	data->images.img_e = mlx_xpm_file_to_image(data->mlx,
-			"./images/key.xpm", &img_width, &img_height);
+			"./textures/key.xpm", &img_width, &img_height);
 	if (!data->images.img_0 || !data->images.img_1 || !data->images.img_p
 		|| !data->images.img_c || !data->images.img_e)
 		error();

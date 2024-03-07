@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:56:37 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/18 18:20:46 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/03/07 18:28:55 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,4 @@ int	main(int argc, char **argv)
 	map = get_map(fd);
 	check_map(map);
 	start_grapic(map);
-	exit(0);
 }

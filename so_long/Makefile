@@ -6,7 +6,7 @@
 #    By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 19:27:01 by hyungcho          #+#    #+#              #
-#    Updated: 2024/03/07 14:09:57 by johyeongeun      ###   ########.fr        #
+#    Updated: 2024/03/07 19:47:53 by johyeongeun      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJS = $(SRCS:.c=.o)
 SUBDIRS = 	Libft						\
 			minilibx_opengl_20191021	\
 
-CFLAGS = -c -Wall -Wextra -Werror
+CFLAGS = -c -Wall -Wextra -Werror -g
 
 all : $(NAME)
 

@@ -6,13 +6,44 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 22:19:27 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/03/07 12:13:53 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/03/07 20:02:33 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	check_map_contents(char **map)
+static void	check_map_contents(char **map);
+static void	check_map_validation(char **map);
+static int	check_map_bfs(char **map, t_list **queue, int xpos, int ypos);
+static char	**strsdup(char **strs);
+
+void	check_map(char **map)
+{
+	int	i;
+	int	height;
+	int	width;
+
+	height = 0;
+	while (map[height])
+		height++;
+	width = ft_strlen(map[0]);
+	i = -1;
+	while (++i < height)
+	{
+		if (width != (int)ft_strlen(map[i]))
+			error();
+		if (map[i][0] != '1' || map[i][width - 1] != '1')
+			error();
+	}
+	i = -1;
+	while (++i < width)
+		if (map[0][i] != '1' || map[height -1][i] != '1')
+			error();
+	check_map_contents(map);
+	check_map_validation(map);
+}
+
+void	check_map_contents(char **map)
 {
 	int	i;
 	int	j;
@@ -41,23 +72,7 @@ static void	check_map_contents(char **map)
 		error();
 }
 
-static char	**strsdup(char **strs)
-{
-	char	**new_strs;
-	int		str_count;
-	int		i;
-
-	str_count = 0;
-	while (strs[str_count])
-		str_count++;
-	new_strs = (char **)malloc(sizeof(char *) * str_count);
-	i = -1;
-	while (++i < str_count)
-		new_strs[i] = ft_strdup(strs[i]);
-	return (new_strs);
-}
-
-static int	check_map_bfs(char **map, t_list **queue, int xpos, int ypos)
+int	check_map_bfs(char **map, t_list **queue, int xpos, int ypos)
 {
 	int		*xypos;
 	char	**visited;
@@ -74,7 +89,7 @@ static int	check_map_bfs(char **map, t_list **queue, int xpos, int ypos)
 		}
 		if (map[xypos[1]][xypos[0]] == '1'
 			|| visited[xypos[1]][xypos[0]] == '2'
-			|| visited[xypos[1]][xypos[0]] == 'E')
+			|| (map[ypos][xpos] == 'C' && map[xypos[1]][xypos[0]] == 'E'))
 			continue ;
 		visited[xypos[1]][xypos[0]] = '2';
 		queue_push_xypos(queue, xypos[0] + 1, xypos[1]);
@@ -86,7 +101,7 @@ static int	check_map_bfs(char **map, t_list **queue, int xpos, int ypos)
 	return (0);
 }
 
-static void	check_map_validation(char **map)
+void	check_map_validation(char **map)
 {
 	int		xpos;
 	int		ypos;
@@ -104,34 +119,23 @@ static void	check_map_validation(char **map)
 				if (!check_map_bfs(map, &queue, xpos, ypos))
 					error();
 				ft_lstclear(&queue, free);
-				return ;
 			}
 		}
 	}
 }
 
-void	check_map(char **map)
+char	**strsdup(char **strs)
 {
-	int	i;
-	int	height;
-	int	width;
+	char	**new_strs;
+	int		str_count;
+	int		i;
 
-	height = 0;
-	while (map[height])
-		height++;
-	width = ft_strlen(map[0]);
+	str_count = 0;
+	while (strs[str_count])
+		str_count++;
+	new_strs = (char **)malloc(sizeof(char *) * str_count);
 	i = -1;
-	while (++i < height)
-	{
-		if (width != (int)ft_strlen(map[i]))
-			error();
-		if (map[i][0] != '1' || map[i][width - 1] != '1')
-			error();
-	}
-	i = -1;
-	while (++i < width)
-		if (map[0][i] != '1' || map[height -1][i] != '1')
-			error();
-	check_map_contents(map);
-	check_map_validation(map);
+	while (++i < str_count)
+		new_strs[i] = ft_strdup(strs[i]);
+	return (new_strs);
 }
