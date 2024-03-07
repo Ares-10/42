@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 22:19:27 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/02/28 20:48:25 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/03/07 12:13:53 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,14 @@ static int	check_map_bfs(char **map, t_list **queue, int xpos, int ypos)
 	while (*queue)
 	{
 		xypos = (int *)queue_pop(queue);
-		if (map[xypos[1]][xypos[0]] == 'E')
+		if (map[xypos[1]][xypos[0]] == 'P')
 		{
 			free(visited);
 			return (1);
 		}
 		if (map[xypos[1]][xypos[0]] == '1'
-			|| visited[xypos[1]][xypos[0]] == '2')
+			|| visited[xypos[1]][xypos[0]] == '2'
+			|| visited[xypos[1]][xypos[0]] == 'E')
 			continue ;
 		visited[xypos[1]][xypos[0]] = '2';
 		queue_push_xypos(queue, xypos[0] + 1, xypos[1]);
@@ -97,7 +98,7 @@ static void	check_map_validation(char **map)
 		xpos = 0;
 		while (map[ypos][++xpos])
 		{
-			if (map[ypos][xpos] == 'P' || map[ypos][xpos] == 'C')
+			if (map[ypos][xpos] == 'E' || map[ypos][xpos] == 'C')
 			{
 				queue = NULL;
 				if (!check_map_bfs(map, &queue, xpos, ypos))
