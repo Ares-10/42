@@ -6,15 +6,15 @@
 #    By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 02:57:16 by johyeongeun       #+#    #+#              #
-#    Updated: 2024/02/28 22:40:39 by johyeongeun      ###   ########.fr        #
+#    Updated: 2024/03/07 14:07:37 by johyeongeun      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minitalk
 
 SUBDIRS =	lib			\
-			client		\
-			server		\
+			client_dir	\
+			server_dir	\
 
 CFLAGS = -c -Wall -Wextra -Werror
 
@@ -25,8 +25,8 @@ $(NAME) :
 	for DIRS in $(SUBDIRS); do	\
 		$(MAKE) -C $$DIRS;		\
 	done
-	cp client/client .			\
-	cp server/server .			\
+	cp client_dir/client .
+	cp server_dir/server .
 
 clean :
 	for DIRS in $(SUBDIRS); do		\
@@ -34,7 +34,7 @@ clean :
 	done
 
 fclean : clean
-	rm -rf server client
+	rm server client
 
 re : fclean all
 

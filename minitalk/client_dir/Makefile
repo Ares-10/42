@@ -6,13 +6,13 @@
 #    By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 02:57:16 by johyeongeun       #+#    #+#              #
-#    Updated: 2024/02/28 22:35:23 by johyeongeun      ###   ########.fr        #
+#    Updated: 2024/03/07 14:01:22 by johyeongeun      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minitalk
+NAME = client
 
-SRCS = 	minitalk.c 		\
+SRCS = 	client.c 		\
 
 OBJS = $(SRCS:.c=.o)
 
@@ -22,14 +22,13 @@ CFLAGS = -c -Wall -Wextra -Werror
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	cc $^ lib/*.a -o $(NAME)
+	cc $^ ../lib/*.a -o $(NAME)
 
 %.o: %.c
-	cc $(CFLAGS) -c $< -o $@ -I minitalk.h
+	cc $(CFLAGS) -c $< -o $@ -I client.h
 
 clean :
 	rm -rf $(OBJS)
-	$(MAKE) -C lib fclean
 
 fclean : clean
 	rm -rf $(NAME)
