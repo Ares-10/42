@@ -11,11 +11,22 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <unistd.h>
 
 void	error(void)
 {
 	ft_putendl_fd("Error", 2);
 	exit(EXIT_FAILURE);
+}
+
+void	strsfree(char **ptr)
+{
+	int	i;
+
+	i = 0;
+	while (ptr[i])
+		free(ptr[i++]);
+	free(ptr);
 }
 
 static int	check_arg_and_get_fd(int argc, char **argv)
@@ -52,11 +63,15 @@ static char	**get_map(int fd)
 	{
 		temp = line;
 		line = ft_strjoin(line, new_line);
+		free(new_line);
 		free(temp);
 		new_line = get_next_line(fd);
 	}
 	map = ft_split(line, '\n');
+	free(line);
 	if (!map)
+		error();
+	if (close(fd))
 		error();
 	return (map);
 }

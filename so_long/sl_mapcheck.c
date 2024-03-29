@@ -84,11 +84,10 @@ int	check_map_bfs(char **map, t_list **queue, int xpos, int ypos)
 		xypos = (int *)queue_pop(queue);
 		if (map[xypos[1]][xypos[0]] == 'P')
 		{
-			free(visited);
+			strsfree(visited);
 			return (1);
 		}
-		if (map[xypos[1]][xypos[0]] == '1'
-			|| visited[xypos[1]][xypos[0]] == '2'
+		if (map[xypos[1]][xypos[0]] == '1' || visited[xypos[1]][xypos[0]] == '2'
 			|| (map[ypos][xpos] == 'C' && map[xypos[1]][xypos[0]] == 'E'))
 			continue ;
 		visited[xypos[1]][xypos[0]] = '2';
@@ -96,8 +95,9 @@ int	check_map_bfs(char **map, t_list **queue, int xpos, int ypos)
 		queue_push_xypos(queue, xypos[0], xypos[1] + 1);
 		queue_push_xypos(queue, xypos[0] - 1, xypos[1]);
 		queue_push_xypos(queue, xypos[0], xypos[1] - 1);
+		free(xypos);
 	}
-	free(visited);
+	strsfree(visited);
 	return (0);
 }
 

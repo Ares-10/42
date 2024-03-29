@@ -23,7 +23,7 @@ int	close_callback(void)
 	exit(0);
 	return (0);
 }
-#include<stdio.h>
+
 void	init_images(t_data *data)
 {
 	int	img_width;

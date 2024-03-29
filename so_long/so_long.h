@@ -21,6 +21,8 @@
 
 void	start_grapic(char **map);
 
+void	strsfree(char **ptr);
+
 /* sl_error */
 void	error(void);
 
