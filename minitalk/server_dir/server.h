@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:21:42 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/03/11 16:51:02 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/03/30 14:51:29 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ typedef struct s_msg
 	int	c;
 	int	i;
 }	t_msg;
-
 
 #endif
