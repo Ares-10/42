@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sl_mapcheck.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 22:19:27 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/03/07 20:02:33 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/03/30 14:08:42 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,9 +133,10 @@ char	**strsdup(char **strs)
 	str_count = 0;
 	while (strs[str_count])
 		str_count++;
-	new_strs = (char **)malloc(sizeof(char *) * str_count);
+	new_strs = (char **)malloc(sizeof(char *) * str_count + 1);
 	i = -1;
 	while (++i < str_count)
 		new_strs[i] = ft_strdup(strs[i]);
+	new_strs[i] = NULL;
 	return (new_strs);
 }
