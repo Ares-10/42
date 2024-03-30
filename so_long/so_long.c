@@ -6,7 +6,7 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:56:37 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/03/30 14:08:30 by hyungcho         ###   ########.fr       */
+/*   Updated: 2024/03/30 14:48:16 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,11 @@ static char	**get_map(int fd)
 	return (map);
 }
 
-void	f(void)
-{
-	system("leaks so_long");
-}
-
 int	main(int argc, char **argv)
 {
 	int		fd;
 	char	**map;
 
-	atexit(f);
 	fd = check_arg_and_get_fd(argc, argv);
 	map = get_map(fd);
 	check_map(map);

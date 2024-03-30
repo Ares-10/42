@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sl_graphic.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:34:32 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/03/07 20:25:33 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/03/30 14:49:14 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,7 +6,7 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 22:19:27 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/03/30 14:08:42 by hyungcho         ###   ########.fr       */
+/*   Updated: 2024/03/30 14:46:35 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	check_map_contents(char **map);
 static void	check_map_validation(char **map);
-static int	check_map_bfs(char **map, t_list **queue, int xpos, int ypos);
+static int	check_map_bfs(char **map, char **visited, t_list **queue, char c);
 static char	**strsdup(char **strs);
 
 void	check_map(char **map)
@@ -72,24 +72,24 @@ void	check_map_contents(char **map)
 		error();
 }
 
-int	check_map_bfs(char **map, t_list **queue, int xpos, int ypos)
+int	check_map_bfs(char **map, char **visited, t_list **queue, char content)
 {
 	int		*xypos;
-	char	**visited;
 
-	visited = strsdup(map);
-	queue_push_xypos(queue, xpos, ypos);
 	while (*queue)
 	{
 		xypos = (int *)queue_pop(queue);
 		if (map[xypos[1]][xypos[0]] == 'P')
 		{
-			strsfree(visited);
+			free(xypos);
 			return (1);
 		}
 		if (map[xypos[1]][xypos[0]] == '1' || visited[xypos[1]][xypos[0]] == '2'
-			|| (map[ypos][xpos] == 'C' && map[xypos[1]][xypos[0]] == 'E'))
+			|| (content == 'C' && map[xypos[1]][xypos[0]] == 'E'))
+		{
+			free(xypos);
 			continue ;
+		}
 		visited[xypos[1]][xypos[0]] = '2';
 		queue_push_xypos(queue, xypos[0] + 1, xypos[1]);
 		queue_push_xypos(queue, xypos[0], xypos[1] + 1);
@@ -106,6 +106,7 @@ void	check_map_validation(char **map)
 	int		xpos;
 	int		ypos;
 	t_list	*queue;
+	char	**visited;
 
 	ypos = 0;
 	while (map[++ypos])
@@ -116,8 +117,12 @@ void	check_map_validation(char **map)
 			if (map[ypos][xpos] == 'E' || map[ypos][xpos] == 'C')
 			{
 				queue = NULL;
-				if (!check_map_bfs(map, &queue, xpos, ypos))
+				queue_push_xypos(&queue, xpos, ypos);
+				visited = strsdup(map);
+				if (!visited
+					|| !check_map_bfs(map, visited, &queue, map[ypos][xpos]))
 					error();
+				strsfree(visited);
 				ft_lstclear(&queue, free);
 			}
 		}
