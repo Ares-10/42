@@ -33,8 +33,8 @@ $(NAME) : $(OBJS)
 	for DIRS in $(SUBDIRS); do	\
 		$(MAKE) -C $$DIRS;		\
 	done
-	mv Libft/libft.a libft.a
-	mv minilibx_opengl_20191021/libmlx.a libmlx.a
+	cp Libft/libft.a libft.a
+	cp minilibx_opengl_20191021/libmlx.a libmlx.a
 	cc -L. -lmlx -framework OpenGL -framework AppKit $^ libft.a -o $(NAME)
 
 %.o: %.c
