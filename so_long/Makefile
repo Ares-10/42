@@ -6,7 +6,7 @@
 #    By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 19:27:01 by hyungcho          #+#    #+#              #
-#    Updated: 2024/03/07 20:18:52 by johyeongeun      ###   ########.fr        #
+#    Updated: 2024/05/27 00:25:39 by johyeongeun      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ $(NAME) : $(OBJS)
 
 clean :
 	rm -rf $(OBJS)
-	rm -rf libft.a libmlx.a
+	rm -rf libft.a libmlx.a libft/libft.a
 	for DIRS in $(SUBDIRS); do		\
 		$(MAKE) -C $$DIRS clean;	\
 	done
