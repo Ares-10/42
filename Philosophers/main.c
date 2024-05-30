@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:47:02 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/05/28 18:27:24 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/05/30 19:20:07 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,49 +18,53 @@ static int	ph_atoi(const char *str)
 
     n = 0;
     if (!*str || *str < '0' || *str > '9')
-        ph_puterr("arg\n");
+        ph_puterr("wrong argument\n");
     if (*str == '0' && *(str + 1) != '\0')
-        ph_puterr("arg\n");
+        ph_puterr("wrong argument\n");
     while (*str && *str >= '0' && *str <= '9')
     {
 		n = n * 10 + *str - '0';
         str++;
     }
     if (*str != '\0')
-		ph_puterr("arg\n");
+		ph_puterr("wrong argument\n");
 	if (n > INT32_MAX || n < 0)
-		ph_puterr("arg\n");
+		ph_puterr("wrong argument\n");
     return ((int)n);
 }
 
-static int	*ph_get_rule(int argc, char **argv)
+static rule_t	ph_get_rule(int argc, char **argv)
 {
-	int	i;
-	int *rule;
+	int		i;
+	rule_t	rule;
 
 	if (argc != 5 && argc != 6)
-		ph_puterr("arg\n");
-	rule = (int *)malloc(sizeof(int) * 5);
-	if (!rule)
-		ph_puterr("malloc\n");
+		ph_puterr("wrong argument\n");
 	i = -1;
-	while (++i < argc - 1)
-		rule[i] = ph_atoi(argv[i + 1]);
+	rule.number_of_philos = ph_atoi(argv[1]);
+	rule.time_to_die = ph_atoi(argv[2]) * 1000;
+	rule.time_to_eat = ph_atoi(argv[3]) * 1000;
+	rule.time_to_sleep = ph_atoi(argv[4]) * 1000;
 	if (argc == 5)
-		rule[4] = -1;
-	rule[1] *= 1000;
-	rule[2] *= 1000;
-	rule[3] *= 1000;
+		rule.number_of_eats = -1;
+	else
+		rule.number_of_eats = ph_atoi(argv[5]);
+	if (rule.number_of_philos <= 0
+		|| rule.time_to_die <= 0
+		|| rule.time_to_eat <= 0
+		|| rule.time_to_sleep <= 0
+		|| (argc == 6 && rule.number_of_eats <= 0))
+		ph_puterr("wrong argument\n");
 	return (rule);
 }
 
 int	main(int argc, char **argv)
 {
-	int				*rule;
+	rule_t			rule;
 	philo_t			*philos;
 
 	rule = ph_get_rule(argc, argv);
 	ph_philo_init(&philos, rule);
-	ph_philo_start(&philos, rule);
-	ph_philo_destroy(&philos, &rule);
+	ph_philo_start(philos, rule);
+	ph_philo_destroy(&philos, rule.number_of_philos);
 }
