@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:04:15 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/22 22:12:34 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/23 03:22:15 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,30 +47,25 @@ void	ph_monitoring(t_philo *philos, t_rule rule)
 {
 	int			finished_count;
 	int			i;
-	long long	now;
 
-	if (rule.number_of_philos == 1)
-		return ;
 	finished_count = 0;
 	while (finished_count != rule.number_of_philos)
 	{
 		i = -1;
 		while (++i < rule.number_of_philos)
 		{
-			if (philos[i].is_alive)
+			if (!philos[i].is_alive)
+				continue ;
+			if (ph_get_time() - philos[i].last_eat_time >= rule.time_to_die)
 			{
-				now = ph_get_time();			
-				if (now - philos[i].last_eat_time >= rule.time_to_die)
-				{
-					ph_putstat(&philos[i], "died");
-					philos[i].is_alive = 0;
-					finished_count++;
-				}
-				if (philos[i].eat_count == rule.number_of_eats)
-				{
-					philos[i].is_alive = 0;
-					finished_count++;
-				}
+				ph_putstat(&philos[i], "died");
+				philos[i].is_alive = 0;
+				finished_count++;
+			}
+			if (philos[i].eat_count == rule.number_of_eats)
+			{
+				philos[i].is_alive = 0;
+				finished_count++;
 			}
 		}
 		usleep(500);

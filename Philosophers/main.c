@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:47:02 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/22 22:18:50 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/23 03:13:26 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 static int	ph_atoi(const char *str)
 {
-    long    n;
+	long	n;
 
-    n = 0;
-    if (!*str || *str < '0' || *str > '9')
-        ph_puterr("wrong argument\n");
-    if (*str == '0' && *(str + 1) != '\0')
-        ph_puterr("wrong argument\n");
-    while (*str && *str >= '0' && *str <= '9')
-    {
+	n = 0;
+	if (!*str || *str < '0' || *str > '9')
+		ph_puterr("wrong argument\n");
+	if (*str == '0' && *(str + 1) != '\0')
+		ph_puterr("wrong argument\n");
+	while (*str && *str >= '0' && *str <= '9')
+	{
 		n = n * 10 + *str - '0';
-        str++;
-    }
-    if (*str != '\0')
+		str++;
+	}
+	if (*str != '\0')
 		ph_puterr("wrong argument\n");
 	if (n > INT32_MAX || n < 0)
 		ph_puterr("wrong argument\n");
-    return ((int)n);
+	return ((int)n);
 }
 
 static t_rule	ph_get_rule(int argc, char **argv)
@@ -58,8 +58,8 @@ static t_rule	ph_get_rule(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_rule			rule;
-	t_philo			*philos;
+	t_rule	rule;
+	t_philo	*philos;
 
 	rule = ph_get_rule(argc, argv);
 	ph_philo_init(&philos, rule);

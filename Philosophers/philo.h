@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:52:56 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/22 22:12:42 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/23 03:13:49 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fock;
 	pthread_mutex_t	*right_fock;
 }	t_philo;
-
 
 void		ph_puterr(char *msg);
 
