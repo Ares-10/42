@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:04:15 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/05/30 19:49:34 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/22 22:12:34 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ long long	ph_get_time(void)
 	return (tv.tv_sec * 1000000 + tv.tv_usec);
 }
 
-void	ph_putstat(philo_t *philo, char *msg)
+void	ph_putstat(t_philo *philo, char *msg)
 {
 	if (!philo->is_alive)
 		return ;
 	printf("%lld %d %s\n", ph_get_time() / 1000, philo->num, msg);
 }
 
-int	ph_time_sleep(philo_t *philo, long long sleep_time)
+int	ph_time_sleep(t_philo *philo, long long sleep_time)
 {
 	long long	start_time;
 	long long	now;
@@ -43,7 +43,7 @@ int	ph_time_sleep(philo_t *philo, long long sleep_time)
 	return (0);
 }
 
-void	ph_monitoring(philo_t *philos, rule_t rule)
+void	ph_monitoring(t_philo *philos, t_rule rule)
 {
 	int			finished_count;
 	int			i;

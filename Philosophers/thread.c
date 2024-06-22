@@ -6,13 +6,13 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:25:09 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/05/30 19:48:10 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/22 22:12:34 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	ph_philo_action(philo_t *philo)
+static int	ph_philo_action(t_philo *philo)
 {
 	int	ret_val;
 
@@ -35,7 +35,7 @@ static int	ph_philo_action(philo_t *philo)
 	return (1);
 }
 
-static void	*ph_one_philo_action(philo_t *philo)
+static void	*ph_one_philo_action(t_philo *philo)
 {
 	pthread_mutex_lock(philo->right_fock);
 	ph_putstat(philo, "has taken a fork");
@@ -48,10 +48,10 @@ static void	*ph_one_philo_action(philo_t *philo)
 
 static void	*ph_philo_create(void *p)
 {
-	philo_t	*philo;
-	rule_t	rule;
+	t_philo	*philo;
+	t_rule	rule;
 
-	philo = (philo_t *)p;
+	philo = (t_philo *)p;
 	rule = philo->rule;
 	if (rule.number_of_philos == 1)
 		return (ph_one_philo_action(philo));
@@ -74,7 +74,7 @@ static void	*ph_philo_create(void *p)
 	return (NULL);
 }
 
-void	ph_philo_start(philo_t *philos, rule_t rule)
+void	ph_philo_start(t_philo *philos, t_rule rule)
 {
 	int	i;
 
@@ -89,7 +89,7 @@ void	ph_philo_start(philo_t *philos, rule_t rule)
 			ph_puterr("pthread join failed\n");;
 }
 
-void	ph_philo_destroy(philo_t **philos, int number_of_philos)
+void	ph_philo_destroy(t_philo **philos, int number_of_philos)
 {
 	int i;
 
@@ -102,11 +102,11 @@ void	ph_philo_destroy(philo_t **philos, int number_of_philos)
 	free(*philos);
 }
 
-void	ph_philo_init(philo_t **philos, rule_t rule)
+void	ph_philo_init(t_philo **philos, t_rule rule)
 {
 	int	i;
 
-	*philos = (philo_t *)malloc(sizeof(philo_t) * rule.number_of_philos);
+	*philos = (t_philo *)malloc(sizeof(t_philo) * rule.number_of_philos);
 	if (!philos)
 		ph_puterr("malloc failed\n");
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:47:02 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/05/30 19:20:07 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/22 22:12:34 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ static int	ph_atoi(const char *str)
     return ((int)n);
 }
 
-static rule_t	ph_get_rule(int argc, char **argv)
+static t_rule	ph_get_rule(int argc, char **argv)
 {
 	int		i;
-	rule_t	rule;
+	t_rule	rule;
 
 	if (argc != 5 && argc != 6)
 		ph_puterr("wrong argument\n");
@@ -60,8 +60,8 @@ static rule_t	ph_get_rule(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	rule_t			rule;
-	philo_t			*philos;
+	t_rule			rule;
+	t_philo			*philos;
 
 	rule = ph_get_rule(argc, argv);
 	ph_philo_init(&philos, rule);
