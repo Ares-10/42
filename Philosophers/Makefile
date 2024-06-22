@@ -4,6 +4,7 @@ SRCS =  main.c		\
 		error.c		\
 		utils.c		\
 		thread.c	\
+		philoset.c	\
 
 OBJS = $(SRCS:.c=.o)
 

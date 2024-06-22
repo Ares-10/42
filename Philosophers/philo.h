@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:52:56 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/23 03:13:49 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/23 03:38:10 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_philo
 	t_rule			rule;
 	long long		last_eat_time;
 	int				is_alive;
+	pthread_mutex_t	mutex;
 	pthread_mutex_t	*left_fock;
 	pthread_mutex_t	*right_fock;
 }	t_philo;
