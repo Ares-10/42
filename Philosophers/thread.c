@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:25:09 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/22 22:12:34 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/22 22:19:35 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static int	ph_philo_action(t_philo *philo)
 {
-	int	ret_val;
-
-	ret_val = 1;
 	pthread_mutex_lock(philo->right_fock);
 	ph_putstat(philo, "has taken a fork");
 	pthread_mutex_lock(philo->left_fock);

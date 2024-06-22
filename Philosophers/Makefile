@@ -15,7 +15,7 @@ CFLAGS = -Wall -Wextra -Werror	\
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	cc $^ -lpthread -o $(NAME)
+	cc $(CFLAGS) $^ -lpthread -o $(NAME)
 
 %.o: %.c
 	cc $(CFLAGS) -c $< -o $@ -I philo.h
