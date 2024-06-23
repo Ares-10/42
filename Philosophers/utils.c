@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:04:15 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/23 05:09:27 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/24 00:24:52 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,32 +50,34 @@ int	ph_time_sleep(t_philo *philo, long long sleep_time)
 	return (0);
 }
 
-static int	ph_philo_check_end(t_philo philo, t_rule rule)
+static int	ph_philo_check_end(t_philo *philo, t_rule rule)
 {
 	int	flag;
 
-	pthread_mutex_lock(&philo.mutex);
-	if (!philo.is_alive)
+	pthread_mutex_lock(&philo->mutex);
+	if (!philo->is_alive)
 	{
-		pthread_mutex_unlock(&philo.mutex);
+		pthread_mutex_unlock(&philo->mutex);
 		return (0);
 	}
-	if (ph_get_time() - philo.last_eat_time >= rule.time_to_die)
+	if (ph_get_time() - philo->last_eat_time >= rule.time_to_die)
 	{
-		printf("%lld %d died\n", ph_get_time() / 1000, philo.num);
-		philo.is_alive = 0;
+		printf("%lld %d died\n", ph_get_time() / 1000, philo->num);
+		philo->is_alive = 0;
 	}
-	else if (philo.eat_count == rule.number_of_eats)
-		philo.is_alive = 0;
-	flag = philo.is_alive;
-	pthread_mutex_unlock(&philo.mutex);
+	else if (philo->eat_count == rule.number_of_eats)
+		philo->is_alive = 0;
+	flag = 0;
+	if (!philo->is_alive)
+		flag = 1;
+	pthread_mutex_unlock(&philo->mutex);
 	return (flag);
 }
 
 void	ph_monitoring(t_philo *philos, t_rule rule)
 {
-	int			finished_count;
-	int			i;
+	int	finished_count;
+	int	i;
 
 	finished_count = 0;
 	while (finished_count != rule.number_of_philos)
@@ -83,9 +85,9 @@ void	ph_monitoring(t_philo *philos, t_rule rule)
 		i = -1;
 		while (++i < rule.number_of_philos)
 		{
-			if (ph_philo_check_end(philos[i], rule))
+			if (ph_philo_check_end(&philos[i], rule))
 				finished_count++;
 		}
-		usleep(1000);
+		usleep(100);
 	}
 }

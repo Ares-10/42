@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:25:09 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/23 04:54:42 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/24 00:24:39 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ static int	ph_philo_action(t_philo *philo)
 	ph_putstat(philo, "is eating");
 	pthread_mutex_lock(&philo->mutex);
 	philo->last_eat_time = ph_get_time();
-	philo->eat_count++;
 	pthread_mutex_unlock(&philo->mutex);
 	flag = ph_time_sleep(philo, philo->rule.time_to_eat);
 	pthread_mutex_unlock(philo->left_fock);
 	pthread_mutex_unlock(philo->right_fock);
+	pthread_mutex_lock(&philo->mutex);
+	philo->eat_count++;
+	pthread_mutex_unlock(&philo->mutex);
 	if (philo->eat_count == philo->rule.number_of_eats)
 		flag = 0;
 	return (flag);
