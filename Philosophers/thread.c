@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:25:09 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/24 00:24:39 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/24 00:46:55 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	*ph_philo_create(void *p)
 	if (philo->num % 2 == 1)
 	{
 		ph_putstat(philo, "is thinking");
-		usleep(200);
+		usleep(1000);
 	}
 	while (1)
 	{

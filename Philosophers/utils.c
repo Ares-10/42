@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:04:15 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/24 00:24:52 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/24 00:48:08 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ph_time_sleep(t_philo *philo, long long sleep_time)
 		now = ph_get_time();
 		if (now - start_time >= sleep_time)
 			return (1);
-		usleep(100);
+		usleep(200);
 	}
 	return (0);
 }
@@ -88,6 +88,6 @@ void	ph_monitoring(t_philo *philos, t_rule rule)
 			if (ph_philo_check_end(&philos[i], rule))
 				finished_count++;
 		}
-		usleep(100);
+		usleep(200);
 	}
 }
