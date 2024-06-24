@@ -9,7 +9,7 @@ SRCS =  main.c		\
 OBJS = $(SRCS:.c=.o)
 
 CFLAGS = -Wall -Wextra -Werror	\
-		-g3 -fsanitize=thread	\
+		# -g3 -fsanitize=thread	\
 		# -fsanitize=address		\
 
 
