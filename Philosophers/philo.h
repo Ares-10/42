@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:52:56 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/23 03:38:10 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/24 20:21:18 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int			ph_time_sleep(t_philo *philo, long long sleep_time);
 void		ph_monitoring(t_philo *philos, t_rule rule);
 
 void		ph_philo_init(t_philo **philos, t_rule rule);
-void		ph_philo_start(t_philo *philos, t_rule rule);
+void		ph_philo_start(t_philo **philos, t_rule rule);
 void		ph_philo_destroy(t_philo **philos, int number_of_philos);
+void		ph_philo_set_finished_all(t_philo *philos, t_rule rule);
 
 #endif

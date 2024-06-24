@@ -6,11 +6,24 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 04:54:25 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/23 04:54:40 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/24 20:20:15 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	ph_philo_set_finished_all(t_philo *philos, t_rule rule)
+{
+	int	i;
+
+	i = -1;
+	while (++i < rule.number_of_philos)
+	{
+		pthread_mutex_lock(&philos[i].mutex);
+		(&philos[i])->is_alive = 0;
+		pthread_mutex_unlock(&philos[i].mutex);
+	}
+}
 
 void	ph_philo_destroy(t_philo **philos, int number_of_philos)
 {

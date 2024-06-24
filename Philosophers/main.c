@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:47:02 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/23 03:13:26 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/24 19:55:12 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ int	main(int argc, char **argv)
 
 	rule = ph_get_rule(argc, argv);
 	ph_philo_init(&philos, rule);
-	ph_philo_start(philos, rule);
+	ph_philo_start(&philos, rule);
 	ph_philo_destroy(&philos, rule.number_of_philos);
 }

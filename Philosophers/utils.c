@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:04:15 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/24 00:48:08 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/24 20:21:44 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,17 @@ static int	ph_philo_check_end(t_philo *philo, t_rule rule)
 		pthread_mutex_unlock(&philo->mutex);
 		return (0);
 	}
+	flag = 0;
 	if (ph_get_time() - philo->last_eat_time >= rule.time_to_die)
 	{
 		printf("%lld %d died\n", ph_get_time() / 1000, philo->num);
-		philo->is_alive = 0;
+		flag = 1;
 	}
 	else if (philo->eat_count == rule.number_of_eats)
+	{
 		philo->is_alive = 0;
-	flag = 0;
-	if (!philo->is_alive)
-		flag = 1;
+		flag = 2;
+	}
 	pthread_mutex_unlock(&philo->mutex);
 	return (flag);
 }
@@ -78,6 +79,7 @@ void	ph_monitoring(t_philo *philos, t_rule rule)
 {
 	int	finished_count;
 	int	i;
+	int	flag;
 
 	finished_count = 0;
 	while (finished_count != rule.number_of_philos)
@@ -85,7 +87,13 @@ void	ph_monitoring(t_philo *philos, t_rule rule)
 		i = -1;
 		while (++i < rule.number_of_philos)
 		{
-			if (ph_philo_check_end(&philos[i], rule))
+			flag = ph_philo_check_end(&philos[i], rule);
+			if (flag == 1)
+			{
+				ph_philo_set_finished_all(philos, rule);
+				return ;
+			}
+			else if (flag == 2)
 				finished_count++;
 		}
 		usleep(200);

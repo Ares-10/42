@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:25:09 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/24 00:46:55 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/24 20:16:00 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,18 @@ static void	*ph_philo_create(void *p)
 	return (NULL);
 }
 
-void	ph_philo_start(t_philo *philos, t_rule rule)
+void	ph_philo_start(t_philo **philos, t_rule rule)
 {
 	int	i;
 
 	i = -1;
 	while (++i < rule.number_of_philos)
-		if (pthread_create(&philos[i].id, NULL, ph_philo_create, &(philos[i])))
+		if (pthread_create(&(*philos)[i].id, NULL, ph_philo_create, &(*philos)[i]))
 			ph_puterr("pthread create failed\n");
 	if (rule.number_of_philos != 1)
-		ph_monitoring(philos, rule);
+		ph_monitoring(*philos, rule);
 	i = -1;
 	while (++i < rule.number_of_philos)
-		if (pthread_join(philos[i].id, NULL))
+		if (pthread_join((*philos)[i].id, NULL))
 			ph_puterr("pthread join failed\n");
 }
