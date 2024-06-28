@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:04:15 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/24 20:40:04 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/28 19:48:37 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,19 @@ void	ph_putstat(t_philo *philo, char *msg)
 	pthread_mutex_unlock(&philo->mutex);
 }
 
-int	ph_time_sleep(t_philo *philo, long long sleep_time)
+void	ph_time_sleep(long long sleep_time)
 {
 	long long	start_time;
 	long long	now;
-	int			is_alive;
 
 	start_time = ph_get_time();
 	while (1)
 	{
-		pthread_mutex_lock(&philo->mutex);
-		is_alive = philo->is_alive;
-		pthread_mutex_unlock(&philo->mutex);
-		if (!is_alive)
-			break ;
 		now = ph_get_time();
 		if (now - start_time >= sleep_time)
-			return (1);
+			return ;
 		usleep(200);
 	}
-	return (0);
 }
 
 static int	ph_philo_check_end(t_philo *philo, t_rule rule)

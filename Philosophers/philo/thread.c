@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:25:09 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/28 14:19:34 by hyungcho         ###   ########.fr       */
+/*   Updated: 2024/06/28 20:12:13 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,14 @@ static int	ph_philo_action(t_philo *philo)
 {
 	int	flag;
 
-	pthread_mutex_lock(philo->right_fock);
-	ph_putstat(philo, "has taken a fork");
-	pthread_mutex_lock(philo->left_fock);
-	ph_putstat(philo, "has taken a fork");
+	pick_fork(philo);
 	ph_putstat(philo, "is eating");
 	pthread_mutex_lock(&philo->mutex);
 	philo->last_eat_time = ph_get_time();
+	flag = philo->is_alive;
 	pthread_mutex_unlock(&philo->mutex);
-	flag = ph_time_sleep(philo, philo->rule.time_to_eat);
-	pthread_mutex_unlock(philo->left_fock);
-	pthread_mutex_unlock(philo->right_fock);
+	ph_time_sleep(philo->rule.time_to_eat);
+	release_fork(philo);
 	pthread_mutex_lock(&philo->mutex);
 	philo->eat_count++;
 	pthread_mutex_unlock(&philo->mutex);
@@ -37,11 +34,11 @@ static int	ph_philo_action(t_philo *philo)
 
 static void	*ph_one_philo_action(t_philo *philo)
 {
-	pthread_mutex_lock(philo->right_fock);
+	pthread_mutex_lock(philo->right_fork_mutex);
 	ph_putstat(philo, "has taken a fork");
 	usleep(philo->rule.time_to_die);
 	ph_putstat(philo, "died");
-	pthread_mutex_unlock(philo->right_fock);
+	pthread_mutex_unlock(philo->right_fork_mutex);
 	philo->is_alive = 0;
 	return (NULL);
 }
@@ -58,17 +55,19 @@ static void	*ph_philo_create(void *p)
 	if (philo->num % 2 == 1)
 	{
 		ph_putstat(philo, "is thinking");
-		usleep(2000);
+		usleep(5000);
 	}
-	while (1)
+	pthread_mutex_lock(&philo->mutex);
+	while (philo->is_alive)
 	{
+		pthread_mutex_unlock(&philo->mutex);
 		if (!ph_philo_action(philo))
-			return (NULL);
+			break ;
 		ph_putstat(philo, "is sleeping");
-		if (!ph_time_sleep(philo, rule.time_to_sleep))
-			return (NULL);
+		ph_time_sleep(rule.time_to_sleep);
 		ph_putstat(philo, "is thinking");
 	}
+	pthread_mutex_unlock(&philo->mutex);
 	return (NULL);
 }
 

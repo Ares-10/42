@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:52:56 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/24 20:21:18 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/28 20:10:35 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,22 @@ typedef struct s_philo
 	t_rule			rule;
 	long long		last_eat_time;
 	int				is_alive;
+	int				left_fork;
+	int				right_fork;
 	pthread_mutex_t	mutex;
-	pthread_mutex_t	*left_fock;
-	pthread_mutex_t	*right_fock;
+	pthread_mutex_t	*left_fork_mutex;
+	pthread_mutex_t	*right_fork_mutex;
 }	t_philo;
 
 void		ph_puterr(char *msg);
 
 long long	ph_get_time(void);
 void		ph_putstat(t_philo *philo, char *msg);
-int			ph_time_sleep(t_philo *philo, long long sleep_time);
+void		ph_time_sleep(long long sleep_time);
 void		ph_monitoring(t_philo *philos, t_rule rule);
+
+void		pick_fork(t_philo *philo);
+void		release_fork(t_philo *philo);
 
 void		ph_philo_init(t_philo **philos, t_rule rule);
 void		ph_philo_start(t_philo **philos, t_rule rule);
