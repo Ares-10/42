@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:47:02 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/24 19:55:12 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/30 06:51:02 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static t_rule	ph_get_rule(int argc, char **argv)
 		|| rule.time_to_sleep <= 0
 		|| (argc == 6 && rule.number_of_eats <= 0))
 		ph_puterr("wrong argument\n");
+	rule.start_time = ph_get_time();
 	return (rule);
 }
 
