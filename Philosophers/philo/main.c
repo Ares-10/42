@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:47:02 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/30 06:51:02 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/30 07:41:57 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,29 @@ static t_rule	ph_get_rule(int argc, char **argv)
 		ph_puterr("wrong argument\n");
 	rule.start_time = ph_get_time();
 	return (rule);
+}
+
+static void	ph_philo_init(t_philo **philos, t_rule rule)
+{
+	int		i;
+	t_philo	*philo;
+
+	*philos = (t_philo *)malloc(sizeof(t_philo) * rule.number_of_philos);
+	if (!philos)
+		ph_puterr("malloc failed\n");
+	ph_philo_fork_init(philos, rule.number_of_philos);
+	i = -1;
+	while (++i < rule.number_of_philos)
+	{
+		philo = &(*philos)[i];
+		philo->rule = rule;
+		philo->eat_count = 0;
+		philo->num = i + 1;
+		philo->is_alive = 1;
+		pthread_mutex_init(&philo->mutex, NULL);
+		pthread_mutex_init(&philo->eat_mutex, NULL);
+		philo->last_eat_time = ph_get_time();
+	}
 }
 
 int	main(int argc, char **argv)

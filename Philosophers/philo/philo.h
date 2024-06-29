@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:52:56 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/30 06:57:17 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/30 07:42:19 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ typedef struct s_philo
 	t_rule			rule;
 	long long		last_eat_time;
 	int				is_alive;
+	int				*left_fork;
+	int				*right_fork;
 	pthread_mutex_t	mutex;
 	pthread_mutex_t	eat_mutex;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*lfork_mutex;
+	pthread_mutex_t	*rfork_mutex;
 }	t_philo;
 
 void		ph_puterr(char *msg);
@@ -50,7 +52,10 @@ void		ph_putstat(t_philo *philo, char *msg);
 void		ph_time_sleep(long long sleep_time);
 void		ph_monitoring(t_philo *philos, t_rule rule);
 
-void		ph_philo_init(t_philo **philos, t_rule rule);
+void		pick_fork(t_philo *philo);
+void		release_fork(t_philo *philo);
+
+void		ph_philo_fork_init(t_philo **philos, int num_philos);
 void		ph_philo_start(t_philo **philos, t_rule rule);
 void		ph_philo_destroy(t_philo **philos, int number_of_philos);
 void		ph_philo_set_finished_all(t_philo *philos, t_rule rule);

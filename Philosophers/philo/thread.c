@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:25:09 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/30 07:04:42 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/30 07:31:28 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@ static int	ph_philo_action(t_philo *philo)
 {
 	long long	now;
 
-	pthread_mutex_lock(philo->right_fork);
-	ph_putstat(philo, "has taken a fork");
-	pthread_mutex_lock(philo->left_fork);
-	ph_putstat(philo, "has taken a fork");
+	pick_fork(philo);
 	ph_putstat(philo, "is eating");
 	now = ph_get_time();
 	pthread_mutex_lock(&philo->eat_mutex);
@@ -27,8 +24,7 @@ static int	ph_philo_action(t_philo *philo)
 	philo->eat_count++;
 	pthread_mutex_unlock(&philo->eat_mutex);
 	ph_time_sleep(philo->rule.time_to_eat);
-	pthread_mutex_unlock(philo->left_fork);
-	pthread_mutex_unlock(philo->right_fork);
+	release_fork(philo);
 	if (philo->eat_count == philo->rule.number_of_eats)
 		return (0);
 	return (1);
@@ -36,11 +32,11 @@ static int	ph_philo_action(t_philo *philo)
 
 static void	*ph_one_philo_action(t_philo *philo)
 {
-	pthread_mutex_lock(philo->right_fork);
+	pthread_mutex_lock(philo->rfork_mutex);
 	ph_putstat(philo, "has taken a fork");
 	ph_time_sleep(philo->rule.time_to_die);
 	ph_putstat(philo, "died");
-	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(philo->rfork_mutex);
 	philo->is_alive = 0;
 	return (NULL);
 }
