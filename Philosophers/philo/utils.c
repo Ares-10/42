@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:04:15 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/30 08:20:47 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/30 08:34:21 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,15 @@ static int	ph_philo_check_end(t_philo *philo, t_rule *rule)
 	last_eat_time = philo->last_eat_time;
 	eat_count = philo->eat_count;
 	pthread_mutex_unlock(&philo->eat_mutex);
+	pthread_mutex_lock(&philo->mutex);
 	if (ph_get_time() - last_eat_time >= rule->time_to_die)
+	{
+		philo->is_alive = 0;
+		pthread_mutex_unlock(&philo->mutex);
 		return (1);
-	else if (eat_count == rule->number_of_eats)
+	}
+	pthread_mutex_unlock(&philo->mutex);
+	if (eat_count == rule->number_of_eats)
 	{
 		pthread_mutex_lock(&philo->mutex);
 		philo->is_alive = 0;
