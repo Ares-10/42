@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:04:15 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/30 06:57:07 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/30 08:01:35 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ long long	ph_get_time(void)
 
 void	ph_putstat(t_philo *philo, char *msg)
 {
+	pthread_mutex_lock(&philo->rule->print_mutex);
 	pthread_mutex_lock(&philo->mutex);
 	if (philo->is_alive)
-		printf("%lld %d %s\n", (ph_get_time() - philo->rule.start_time) \
+		printf("%lld %d %s\n", (ph_get_time() - philo->rule->start_time) \
 			/ 1000, philo->num, msg);
 	pthread_mutex_unlock(&philo->mutex);
+	pthread_mutex_unlock(&philo->rule->print_mutex);
 }
 
 void	ph_time_sleep(long long sleep_time)
@@ -45,7 +47,7 @@ void	ph_time_sleep(long long sleep_time)
 	return ;
 }
 
-static int	ph_philo_check_end(t_philo *philo, t_rule rule)
+static int	ph_philo_check_end(t_philo *philo, t_rule *rule)
 {
 	long long	last_eat_time;
 	int			eat_count;
@@ -56,9 +58,9 @@ static int	ph_philo_check_end(t_philo *philo, t_rule rule)
 	last_eat_time = philo->last_eat_time;
 	eat_count = philo->eat_count;
 	pthread_mutex_unlock(&philo->eat_mutex);
-	if (ph_get_time() - last_eat_time >= rule.time_to_die)
+	if (ph_get_time() - last_eat_time >= rule->time_to_die)
 		return (1);
-	else if (eat_count == rule.number_of_eats)
+	else if (eat_count == rule->number_of_eats)
 	{
 		pthread_mutex_lock(&philo->mutex);
 		philo->is_alive = 0;
@@ -68,23 +70,23 @@ static int	ph_philo_check_end(t_philo *philo, t_rule rule)
 	return (0);
 }
 
-void	ph_monitoring(t_philo *philos, t_rule rule)
+void	ph_monitoring(t_philo *philos, t_rule *rule)
 {
 	int	finished_count;
 	int	i;
 	int	flag;
 
 	finished_count = 0;
-	while (finished_count != rule.number_of_philos)
+	while (finished_count != rule->number_of_philos)
 	{
 		i = -1;
-		while (++i < rule.number_of_philos)
+		while (++i < rule->number_of_philos)
 		{
 			flag = ph_philo_check_end(&philos[i], rule);
 			if (flag == 1)
 			{
-				ph_philo_set_finished_all(philos, rule);
-				printf("%lld %d died\n", (ph_get_time() - rule.start_time) \
+				ph_philo_set_finished_all(philos, rule->number_of_philos);
+				printf("%lld %d died\n", (ph_get_time() - rule->start_time) \
 					/ 1000, i + 1);
 				return ;
 			}

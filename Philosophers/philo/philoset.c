@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 04:54:25 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/30 07:42:02 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/30 07:50:03 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	release_fork(t_philo *philo)
 	*(philo->left_fork) = 0;
 }
 
-void	ph_philo_set_finished_all(t_philo *philos, t_rule rule)
+void	ph_philo_set_finished_all(t_philo *philos, int number_of_philos)
 {
 	int	i;
 
 	i = -1;
-	while (++i < rule.number_of_philos)
+	while (++i < number_of_philos)
 	{
 		pthread_mutex_lock(&philos[i].mutex);
 		(&philos[i])->is_alive = 0;

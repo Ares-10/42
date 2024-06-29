@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:25:09 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/30 07:31:28 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/30 07:56:27 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static int	ph_philo_action(t_philo *philo)
 	philo->last_eat_time = now;
 	philo->eat_count++;
 	pthread_mutex_unlock(&philo->eat_mutex);
-	ph_time_sleep(philo->rule.time_to_eat);
+	ph_time_sleep(philo->rule->time_to_eat);
 	release_fork(philo);
-	if (philo->eat_count == philo->rule.number_of_eats)
+	if (philo->eat_count == philo->rule->number_of_eats)
 		return (0);
 	return (1);
 }
@@ -34,7 +34,7 @@ static void	*ph_one_philo_action(t_philo *philo)
 {
 	pthread_mutex_lock(philo->rfork_mutex);
 	ph_putstat(philo, "has taken a fork");
-	ph_time_sleep(philo->rule.time_to_die);
+	ph_time_sleep(philo->rule->time_to_die);
 	ph_putstat(philo, "died");
 	pthread_mutex_unlock(philo->rfork_mutex);
 	philo->is_alive = 0;
@@ -44,11 +44,11 @@ static void	*ph_one_philo_action(t_philo *philo)
 static void	*ph_philo_create(void *p)
 {
 	t_philo	*philo;
-	t_rule	rule;
+	t_rule	*rule;
 
 	philo = (t_philo *)p;
 	rule = philo->rule;
-	if (rule.number_of_philos == 1)
+	if (rule->number_of_philos == 1)
 		return (ph_one_philo_action(philo));
 	if (philo->num % 2 == 1)
 	{
@@ -64,26 +64,27 @@ static void	*ph_philo_create(void *p)
 		if (!ph_philo_action(philo))
 			return (NULL);
 		ph_putstat(philo, "is sleeping");
-		ph_time_sleep(rule.time_to_sleep);
+		ph_time_sleep(rule->time_to_sleep);
 		ph_putstat(philo, "is thinking");
 	}
 	return (NULL);
 }
 
-void	ph_philo_start(t_philo **p, t_rule rule)
+void	ph_philo_start(t_philo **p, t_rule *rule)
 {
 	int		i;
 	t_philo	*philos;
 
 	philos = *p;
 	i = -1;
-	while (++i < rule.number_of_philos)
+	rule->start_time = ph_get_time();
+	while (++i < rule->number_of_philos)
 		if (pthread_create(&philos[i].id, NULL, ph_philo_create, &philos[i]))
 			ph_puterr("pthread create failed\n");
-	if (rule.number_of_philos != 1)
+	if (rule->number_of_philos != 1)
 		ph_monitoring(philos, rule);
 	i = -1;
-	while (++i < rule.number_of_philos)
+	while (++i < rule->number_of_philos)
 		if (pthread_join(philos[i].id, NULL))
 			ph_puterr("pthread join failed\n");
 }
