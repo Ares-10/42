@@ -6,7 +6,7 @@
 /*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:04:15 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/30 08:01:35 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/06/30 08:20:47 by johyeongeun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,10 @@ void	ph_monitoring(t_philo *philos, t_rule *rule)
 			if (flag == 1)
 			{
 				ph_philo_set_finished_all(philos, rule->number_of_philos);
+				pthread_mutex_lock(&rule->print_mutex);
 				printf("%lld %d died\n", (ph_get_time() - rule->start_time) \
 					/ 1000, i + 1);
+				pthread_mutex_unlock(&rule->print_mutex);
 				return ;
 			}
 			else if (flag == 2)
