@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:25:09 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/30 07:56:27 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/07/02 17:55:27 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static int	ph_philo_action(t_philo *philo)
 	long long	now;
 
 	pick_fork(philo);
-	ph_putstat(philo, "is eating");
 	now = ph_get_time();
 	pthread_mutex_lock(&philo->eat_mutex);
 	philo->last_eat_time = now;
 	philo->eat_count++;
+	ph_putstat(philo, "is eating");
 	pthread_mutex_unlock(&philo->eat_mutex);
 	ph_time_sleep(philo->rule->time_to_eat);
 	release_fork(philo);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:04:15 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/30 08:34:21 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/07/02 18:04:20 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,21 @@ void	ph_time_sleep(long long sleep_time)
 
 static int	ph_philo_check_end(t_philo *philo, t_rule *rule)
 {
-	long long	last_eat_time;
-	int			eat_count;
+	int	eat_count;
 
 	if (!philo->is_alive)
 		return (0);
 	pthread_mutex_lock(&philo->eat_mutex);
-	last_eat_time = philo->last_eat_time;
 	eat_count = philo->eat_count;
-	pthread_mutex_unlock(&philo->eat_mutex);
-	pthread_mutex_lock(&philo->mutex);
-	if (ph_get_time() - last_eat_time >= rule->time_to_die)
+	if (ph_get_time() - philo->last_eat_time >= rule->time_to_die)
 	{
+		pthread_mutex_lock(&philo->mutex);
 		philo->is_alive = 0;
 		pthread_mutex_unlock(&philo->mutex);
+		pthread_mutex_lock(&rule->print_mutex);
 		return (1);
 	}
-	pthread_mutex_unlock(&philo->mutex);
+	pthread_mutex_unlock(&philo->eat_mutex);
 	if (eat_count == rule->number_of_eats)
 	{
 		pthread_mutex_lock(&philo->mutex);
@@ -92,10 +90,10 @@ void	ph_monitoring(t_philo *philos, t_rule *rule)
 			if (flag == 1)
 			{
 				ph_philo_set_finished_all(philos, rule->number_of_philos);
-				pthread_mutex_lock(&rule->print_mutex);
 				printf("%lld %d died\n", (ph_get_time() - rule->start_time) \
 					/ 1000, i + 1);
 				pthread_mutex_unlock(&rule->print_mutex);
+				pthread_mutex_unlock(&(&philos[i])->eat_mutex);
 				return ;
 			}
 			else if (flag == 2)
