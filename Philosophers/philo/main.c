@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:47:02 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/30 08:00:31 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/07/02 18:23:03 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static t_rule	*ph_get_rule(int argc, char **argv)
 		|| rule->time_to_sleep <= 0
 		|| (argc == 6 && rule->number_of_eats <= 0))
 		ph_puterr("wrong argument\n");
+	rule->finished = 0;
 	pthread_mutex_init(&rule->print_mutex, NULL);
 	return (rule);
 }

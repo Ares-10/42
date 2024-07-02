@@ -6,7 +6,7 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:04:15 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/07/02 18:04:20 by hyungcho         ###   ########.fr       */
+/*   Updated: 2024/07/02 18:48:49 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ph_putstat(t_philo *philo, char *msg)
 	pthread_mutex_unlock(&philo->rule->print_mutex);
 }
 
-void	ph_time_sleep(long long sleep_time)
+void	ph_time_sleep(t_rule *rule, long long sleep_time)
 {
 	long long	start_time;
 	long long	now;
@@ -42,6 +42,13 @@ void	ph_time_sleep(long long sleep_time)
 		now = ph_get_time();
 		if (now - start_time >= sleep_time)
 			return ;
+		pthread_mutex_lock(&rule->finished_mutex);
+		if (rule->finished)
+		{
+			pthread_mutex_unlock(&rule->finished_mutex);
+			return ;
+		}
+		pthread_mutex_unlock(&rule->finished_mutex);
 		usleep(400);
 	}
 	return ;
@@ -89,7 +96,7 @@ void	ph_monitoring(t_philo *philos, t_rule *rule)
 			flag = ph_philo_check_end(&philos[i], rule);
 			if (flag == 1)
 			{
-				ph_philo_set_finished_all(philos, rule->number_of_philos);
+				ph_philo_set_finished_all(philos, rule);
 				printf("%lld %d died\n", (ph_get_time() - rule->start_time) \
 					/ 1000, i + 1);
 				pthread_mutex_unlock(&rule->print_mutex);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philoset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johyeongeun <johyeongeun@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 04:54:25 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/06/30 07:50:03 by johyeongeun      ###   ########.fr       */
+/*   Updated: 2024/07/02 18:47:40 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,20 @@ void	release_fork(t_philo *philo)
 	*(philo->left_fork) = 0;
 }
 
-void	ph_philo_set_finished_all(t_philo *philos, int number_of_philos)
+void	ph_philo_set_finished_all(t_philo *philos, t_rule *rule)
 {
 	int	i;
 
 	i = -1;
-	while (++i < number_of_philos)
+	while (++i < rule->number_of_philos)
 	{
 		pthread_mutex_lock(&philos[i].mutex);
 		(&philos[i])->is_alive = 0;
 		pthread_mutex_unlock(&philos[i].mutex);
 	}
+	pthread_mutex_lock(&rule->finished_mutex);
+	rule->finished = 1;
+	pthread_mutex_unlock(&rule->finished_mutex);
 }
 
 void	ph_philo_destroy(t_philo **philos, int number_of_philos)

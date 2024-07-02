@@ -6,7 +6,7 @@
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:25:09 by johyeongeun       #+#    #+#             */
-/*   Updated: 2024/07/02 17:55:27 by hyungcho         ###   ########.fr       */
+/*   Updated: 2024/07/02 18:31:32 by hyungcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	ph_philo_action(t_philo *philo)
 	philo->eat_count++;
 	ph_putstat(philo, "is eating");
 	pthread_mutex_unlock(&philo->eat_mutex);
-	ph_time_sleep(philo->rule->time_to_eat);
+	ph_time_sleep(philo->rule, philo->rule->time_to_eat);
 	release_fork(philo);
 	if (philo->eat_count == philo->rule->number_of_eats)
 		return (0);
@@ -34,7 +34,7 @@ static void	*ph_one_philo_action(t_philo *philo)
 {
 	pthread_mutex_lock(philo->rfork_mutex);
 	ph_putstat(philo, "has taken a fork");
-	ph_time_sleep(philo->rule->time_to_die);
+	ph_time_sleep(philo->rule, philo->rule->time_to_die);
 	ph_putstat(philo, "died");
 	pthread_mutex_unlock(philo->rfork_mutex);
 	philo->is_alive = 0;
@@ -64,7 +64,7 @@ static void	*ph_philo_create(void *p)
 		if (!ph_philo_action(philo))
 			return (NULL);
 		ph_putstat(philo, "is sleeping");
-		ph_time_sleep(rule->time_to_sleep);
+		ph_time_sleep(rule, rule->time_to_sleep);
 		ph_putstat(philo, "is thinking");
 	}
 	return (NULL);
