@@ -1,10 +1,5 @@
 #include "Zombie.hpp"
 
-void f()
-{
-	system("leaks Zombie");
-}
-
 int main()
 {
 	Zombie *zombie1;
