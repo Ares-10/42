@@ -62,7 +62,7 @@ void Contact::print_all()
 	std::cout << "last name: " << this->_last_name << std::endl;
 	std::cout << "nickname: " << this->_nickname << std::endl;
 	std::cout << "phone number: " << this->_phone_number << std::endl;
-	std::cout << "first name: " << this->_secret << std::endl;
+	std::cout << "secret: " << this->_secret << std::endl;
 }
 
 bool empty_str(std::string s)
