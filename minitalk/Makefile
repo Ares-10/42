@@ -34,7 +34,7 @@ clean :
 	done
 
 fclean : clean
-	rm server client
+	rm -rf server client
 
 re : fclean all
 
