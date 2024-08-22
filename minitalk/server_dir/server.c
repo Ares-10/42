@@ -14,17 +14,6 @@
 
 t_msg	g_msg;
 
-void	client_handler(int sig)
-{
-	ft_printf("%d\n", sig);
-}
-
-void	error(char *err_msg)
-{
-	ft_printf("Error\n%s\n", err_msg);
-	exit(EXIT_FAILURE);
-}
-
 void	handler(int sig)
 {
 	int	i;

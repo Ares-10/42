@@ -3,6 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: hyungcho <hyungcho@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/28 15:01:24 by hyungcho          #+#    #+#             */
+/*   Updated: 2024/08/22 21:29:17 by hyungcho         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: hyungcho <hyungcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:21:42 by johyeongeun       #+#    #+#             */
@@ -17,7 +29,6 @@
 # include "../lib/include/ft_printf.h"
 # include <unistd.h>
 # include <signal.h>
-# include <stdlib.h>
 
 typedef struct s_msg
 {
