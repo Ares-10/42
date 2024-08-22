@@ -11,7 +11,6 @@ private:
 	unsigned int _energy_points;
 	unsigned int _attack_damage;
 
-	bool statusCheck() const;
 public:
 	ClapTrap();
 

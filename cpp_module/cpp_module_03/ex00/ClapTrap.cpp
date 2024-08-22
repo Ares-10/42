@@ -30,25 +30,18 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &src)
 	return *this;
 }
 
-bool ClapTrap::statusCheck() const
+void ClapTrap::attack(const std::string &target)
 {
 	if (_hit_points <= 0)
 	{
 		std::cout << "ClapTrap " << _name << " can't do anything. Becaues it's hit points is 0" << std::endl;
-		return false;
+		return ;
 	}
 	if (_energy_points <= 0)
 	{
 		std::cout << "ClapTrap " << _name << " can't do anything, becaues it's energy points is 0" << std::endl;
-		return false;
+		return ;
 	}
-	return true;
-}
-
-void ClapTrap::attack(const std::string &target)
-{
-	if (!statusCheck())
-		return;
 	_energy_points--;
 	std::cout << "ClapTrap " << _name << " attacks " << target
 			<< ", causing " << _attack_damage << " points of damage!" << std::endl;
@@ -71,8 +64,16 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	if (!statusCheck())
-		return;
+	if (_hit_points <= 0)
+	{
+		std::cout << "ClapTrap " << _name << " can't do anything. Becaues it's hit points is 0" << std::endl;
+		return ;
+	}
+	if (_energy_points <= 0)
+	{
+		std::cout << "ClapTrap " << _name << " can't do anything, becaues it's energy points is 0" << std::endl;
+		return ;
+	}
 	_energy_points--;
 	_hit_points += amount;
 	std::cout << "ClapTrap " << _name << " is repaired and gained " << amount << " energy points, "
