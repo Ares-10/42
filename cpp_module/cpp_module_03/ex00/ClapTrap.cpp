@@ -35,12 +35,12 @@ void ClapTrap::attack(const std::string &target)
 {
 	if (_hit_points <= 0)
 	{
-		std::cout << "ClapTrap " << _name << " can't do anything. Becaues it's hit points is 0" << std::endl;
+		std::cout << "ClapTrap " << _name << " can't do anything, because its hit points is 0" << std::endl;
 		return ;
 	}
 	if (_energy_points <= 0)
 	{
-		std::cout << "ClapTrap " << _name << " can't do anything, becaues it's energy points is 0" << std::endl;
+		std::cout << "ClapTrap " << _name << " can't do anything, because its energy points is 0" << std::endl;
 		return ;
 	}
 	_energy_points--;
@@ -52,7 +52,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 {
 	if (_hit_points == 0)
 	{
-		std::cout << "ClapTrap " << _name << " can't take damage, because it's already dead" << std::endl;
+		std::cout << "ClapTrap " << _name << " can't take damage, because its already dead" << std::endl;
 		return;
 	}
 	if (_hit_points < amount)
@@ -60,23 +60,23 @@ void ClapTrap::takeDamage(unsigned int amount)
 	else
 		_hit_points -= amount;
 	std::cout << "ClapTrap " << _name << " took damage and lost " << amount << " energy points,"
-			<< " so it's energy point is now " << _hit_points << std::endl;
+			<< " so its energy point is now " << _hit_points << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (_hit_points <= 0)
 	{
-		std::cout << "ClapTrap " << _name << " can't do anything. Becaues it's hit points is 0" << std::endl;
+		std::cout << "ClapTrap " << _name << " can't do anything, because its hit points is 0" << std::endl;
 		return ;
 	}
 	if (_energy_points <= 0)
 	{
-		std::cout << "ClapTrap " << _name << " can't do anything, becaues it's energy points is 0" << std::endl;
+		std::cout << "ClapTrap " << _name << " can't do anything, because its energy points is 0" << std::endl;
 		return ;
 	}
 	_energy_points--;
 	_hit_points += amount;
 	std::cout << "ClapTrap " << _name << " is repaired and gained " << amount << " energy points, "
-			<< "so it's energy point is now " << _hit_points << std::endl;
+			<< "so its energy point is now " << _hit_points << std::endl;
 }
