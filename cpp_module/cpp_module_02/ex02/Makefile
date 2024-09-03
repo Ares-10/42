@@ -13,7 +13,7 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	c++ $(CPPFLAGS) $^ -o $(NAME)
 
-%.o: %.c
+%.o: %.cpp
 	c++ $(CPPFLAGS) -c $< -o $@ -I.
 
 clean :
