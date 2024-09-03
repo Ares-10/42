@@ -1,6 +1,6 @@
-#include <complex>
 #include <iostream>
 #include <fstream>
+#include <cstring>
 
 static void puterr(std::string msg)
 {
@@ -8,7 +8,7 @@ static void puterr(std::string msg)
 	exit(EXIT_FAILURE);
 }
 
-static void replace_str(std::string &str, const char *s1, const char *s2)
+static void replace_str(std::string &str, const std::string& s1, const std::string& s2)
 {
 	std::string front_str;
 	std::string back_str;
@@ -18,9 +18,9 @@ static void replace_str(std::string &str, const char *s1, const char *s2)
 	if (pos == std::string::npos)
 		return;
 	front_str = str.substr(0, pos);
-	back_str = str.substr(pos + strlen(s1), str.length());
+	back_str = str.substr(pos + s1.length(), str.length());
 	replace_str(back_str, s1, s2);
-	str = front_str + std::string(s2) + back_str;
+	str = front_str + s2 + back_str;
 }
 
 static void readfile(const std::string &filename, std::string &str)
