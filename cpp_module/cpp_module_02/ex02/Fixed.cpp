@@ -142,7 +142,7 @@ Fixed Fixed::operator--(int)
 	return tmp;
 }
 
-const Fixed &Fixed::min(Fixed &a, Fixed &b)
+Fixed &Fixed::min(Fixed &a, Fixed &b)
 {
 	if (b < a)
 		return b;
@@ -156,7 +156,7 @@ const Fixed &Fixed::min(const Fixed &a, const Fixed &b)
 	return a;
 }
 
-const Fixed &Fixed::max(Fixed &a, Fixed &b)
+Fixed &Fixed::max(Fixed &a, Fixed &b)
 {
 	if (b > a)
 		return b;
