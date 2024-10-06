@@ -56,7 +56,6 @@ typedef struct s_data
 	t_images	images;
 }	t_data;
 
-void	start_grapic(char **map);
 int		close_callback(void);
 void	init_data(t_data *data, char **map);
 void	draw_block(t_data *data, int x, int y, void *img);

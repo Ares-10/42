@@ -84,5 +84,5 @@ int	main(int argc, char **argv)
 	fd = check_arg_and_get_fd(argc, argv);
 	map = get_map(fd);
 	check_map(map);
-	start_grapic(map);
+	start_graphic(map);
 }

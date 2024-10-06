@@ -87,7 +87,7 @@ static int	key_press(int keycode, t_data *data)
 	return (0);
 }
 
-void	start_grapic(char **map)
+void	start_graphic(char **map)
 {
 	t_data	data;
 

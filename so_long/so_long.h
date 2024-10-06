@@ -19,7 +19,7 @@
 # include "get_next_line/get_next_line.h"
 # include "sl_graphic.h"
 
-void	start_grapic(char **map);
+void	start_graphic(char **map);
 
 void	strsfree(char **ptr);
 
