@@ -39,7 +39,6 @@ Form::~Form()
 
 Form &Form::operator=(const Form &src)
 {
-	std::cout << "Form Assignation operator called" << std::endl;
 	if (this == &src)
 		return *this;
 	return *this;
