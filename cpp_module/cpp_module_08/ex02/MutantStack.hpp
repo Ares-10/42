@@ -22,9 +22,8 @@ public:
 
 	MutantStack &operator=(MutantStack const &src)
 	{
-		if (this == &src)
-			return *this;
-		this->c = src.c;
+		if (this != &src)
+			this->c = src.c;
 		return *this;
 	}
 
