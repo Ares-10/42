@@ -23,5 +23,17 @@ int main()
 		}
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;
+	} {
+		std::vector<int> v;
+		v.push_back(5);
+		v.push_back(3);
+		v.push_back(17);
+		v.push_back(9);
+		v.push_back(11);
+
+		Span sp = Span(5);
+		sp.addNumber(v);
+		std::cout << sp.shortestSpan() << std::endl;
+		std::cout << sp.longestSpan() << std::endl;
 	}
 }

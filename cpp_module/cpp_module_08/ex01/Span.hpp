@@ -19,6 +19,7 @@ public:
 	Span &operator=(Span const &obj);
 
 	void	addNumber(int n);
+	void	addNumber(std::vector<int> v);
 	int		shortestSpan();
 	int		longestSpan();
 };

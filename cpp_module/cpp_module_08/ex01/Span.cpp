@@ -35,6 +35,17 @@ void Span::addNumber(int n)
 	_index++;
 }
 
+void Span::addNumber(std::vector<int> v)
+{
+	if (_size < v.size())
+		throw std::exception();
+
+	for (size_t i = 0; i < v.size(); ++i) {
+		_stack.push_back(v[i]);
+		_index++;
+	}
+}
+
 int Span::shortestSpan()
 {
 	if (_index < 2)
