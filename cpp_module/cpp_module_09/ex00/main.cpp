@@ -12,10 +12,13 @@ int main(int argc, char **argv)
 	try
 	{
 		BitcoinExchange bitcoin_exchange = BitcoinExchange("_data.csv");
+
+		bitcoin_exchange.calculateFile(argv[1]);
 		(void) bitcoin_exchange;
 	} catch (const std::exception &e)
 	{
 		std::cerr << "Error: " << e.what() << std::endl;
+		return 1;
 	}
 
 	(void) argv;
