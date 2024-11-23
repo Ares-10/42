@@ -27,7 +27,7 @@ static void checkValidDate(std::string str)
 	int day = std::atoi(str.substr(8, 2).c_str());
 
 	if (year < 1 || year > 9999 || month < 1 || month > 12)
-		throw std::out_of_range("Invalid date value => " + str);
+		throw std::out_of_range("invalid date value => " + str);
 
 	int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
@@ -36,20 +36,20 @@ static void checkValidDate(std::string str)
 	}
 
 	if (!(day >= 1 && day <= daysInMonth[month - 1]))
-		throw std::out_of_range("Invalid date value => " + str);;
+		throw std::out_of_range("invalid date value => " + str);;
 }
 
 static void checkValidDateFormat(const std::string &str)
 {
 	if (str.size() != 10)
-		throw std::invalid_argument("Invalid date format => " + str);
+		throw std::invalid_argument("invalid date format => " + str);
 	if (!(std::isdigit(str[0]) && std::isdigit(str[1])
 		&& std::isdigit(str[2]) && std::isdigit(str[3])
 		&& str[4] == '-'
 		&& std::isdigit(str[5]) && std::isdigit(str[6])
 		&& str[7] == '-'
 		&& std::isdigit(str[8]) && std::isdigit(str[9])))
-		throw std::invalid_argument("Invalid date format => " + str);
+		throw std::invalid_argument("invalid date format => " + str);
 }
 
 static std::string getDate(const std::string &str)
@@ -96,9 +96,9 @@ static float convertStringToFloat(const std::string& input) {
 
 static float getValue(const std::string &str)
 {
-	if (str.empty() || str[0] != ',')
-		throw std::invalid_argument("Invalid value format => " + str);
-	return convertStringToFloat(str.substr(1));
+	if (str.size() < 12 || str[10] != ',')
+		throw std::invalid_argument("invalid value format => " + str);
+	return convertStringToFloat(str.substr(11));
 }
 
 BitcoinExchange::BitcoinExchange(const std::string &filename)
@@ -114,12 +114,12 @@ BitcoinExchange::BitcoinExchange(const std::string &filename)
 
 	std::getline(file, line);
 	if (line != "date,exchange_rate")
-		throw std::runtime_error("Invalid header in file.");
+		throw std::runtime_error("invalid header in file.");
 
 	while (std::getline(file, line))
 	{
 		date = getDate(line.substr(0, 10));
-		value = getValue(line.substr(10));
+		value = getValue(line);
 		_map.insert(std::make_pair(date, value));
 	}
 	file.close();
@@ -175,12 +175,8 @@ void BitcoinExchange::calculateFile(const std::string &filename)
 
 	std::getline(file, line);
 	if (line != "date | value")
-		throw std::runtime_error("Invalid header in file.");
+		throw std::runtime_error("invalid header in file.");
 
 	while (std::getline(file, line))
 		calculateAndPrint(line);
-
-	for (std::map<std::string, float>::const_iterator it = _map.begin(); it != _map.end(); ++it) {
-		std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
-	}
 }
