@@ -6,7 +6,7 @@ int main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		std::cerr << "Error: could not open file." << std::endl;
+		std::cout << "Error: could not open file." << std::endl;
 		return 1;
 	}
 	try
@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 		(void) bitcoin_exchange;
 	} catch (const std::exception &e)
 	{
-		std::cerr << "Error: " << e.what() << std::endl;
+		std::cout << "Error: " << e.what() << std::endl;
 		return 1;
 	}
 
