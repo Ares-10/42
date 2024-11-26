@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 	}
 	try
 	{
-		RPN rpn = RPN(argv[1]);
+		const RPN rpn = RPN(argv[1]);
 		std::cout << rpn.getResult() << std::endl;
 	} catch (std::exception &e)
 	{
