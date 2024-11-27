@@ -6,7 +6,7 @@ int main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		std::cout << "Error: could not open file." << std::endl;
+		std::cerr << "Error: could not open file." << std::endl;
 		return 1;
 	}
 	try
@@ -14,10 +14,9 @@ int main(int argc, char **argv)
 		BitcoinExchange bitcoin_exchange = BitcoinExchange("data.csv");
 
 		bitcoin_exchange.calculateFile(argv[1]);
-		(void) bitcoin_exchange;
 	} catch (const std::exception &e)
 	{
-		std::cout << "Error: " << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 		return 1;
 	}
 

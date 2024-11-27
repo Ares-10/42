@@ -160,7 +160,7 @@ void BitcoinExchange::calculateAndPrint(const std::string &line)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << "Error: " << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 }
 
