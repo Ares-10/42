@@ -28,10 +28,13 @@ private:
 	void	sortDeque();
 
 	void	fordJohnsonVectorAlgorithm(int node_size);
+	void	fordJohnsonDequeAlgorithm(int node_size);
 
 	void	binaryInsertVector(int node_size);
+	void	binaryInsertDeque(int node_size);
 
 	void	groupingVector(int node_size);
+	void	groupingDeque(int node_size);
 
 public:
 	PmergeMe(std::vector<int> input);
