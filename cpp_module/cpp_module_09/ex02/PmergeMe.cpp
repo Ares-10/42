@@ -64,7 +64,11 @@ void PmergeMe::printAfter() const
 {
 	std::cout << "After: ";
 	for (size_t i = 0; i < _vector.size(); i++)
+	{
+		if (_vector[i] != _deque[i])
+			exit(1);
 		std::cout << _vector[i] << " ";
+	}
 	std::cout << std::endl;
 }
 
@@ -98,6 +102,8 @@ void PmergeMe::sort()
 	_deque_stopwatch = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC * 1e6;
 }
 
+/** ===================== Vector ===================== */
+
 void PmergeMe::sortVector()
 {
 	fordJohnsonVectorAlgorithm(1);
@@ -114,8 +120,6 @@ void PmergeMe::fordJohnsonVectorAlgorithm(int node_size)
 	}
 }
 
-/** ===================== Vector ===================== */
-
 static void moveVector(std::vector<int> &a, std::vector<int> &b, int apos, int bpos, int size)
 {
 	apos = apos * size;
@@ -131,7 +135,11 @@ static int binarySearchVector(const std::vector<int> &a, int n, int left, int ri
 
 	mid = (left + right) / 2;
 	if (right <= left)
-		return mid;
+	{
+		if (a[right * node_size] < n)
+			return right + 1;
+		return left;
+	}
 	if (a[mid * node_size] > n)
 		return binarySearchVector(a, n, left, mid, node_size);
 	if (a[mid * node_size] < n)
@@ -216,7 +224,11 @@ static int binarySearchDeque(const std::deque<int> &a, int n, int left, int righ
 
 	mid = (left + right) / 2;
 	if (right <= left)
-		return mid;
+	{
+		if (a[right * node_size] < n)
+			return right + 1;
+		return left;
+	}
 	if (a[mid * node_size] > n)
 		return binarySearchDeque(a, n, left, mid, node_size);
 	if (a[mid * node_size] < n)

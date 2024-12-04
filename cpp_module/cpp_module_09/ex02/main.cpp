@@ -1,6 +1,11 @@
 #include "PmergeMe.hpp"
 #include <sstream>
 
+// void f()
+// {
+// 	system("leaks PmergeMe");
+// }
+
 static void err()
 {
 	std::cerr << "Error" << std::endl;
@@ -10,7 +15,7 @@ static void err()
 static void checkPositiveInteger(std::string s)
 {
 	for (int i = 0; s[i]; i++)
-		if (!std::isdigit(s[0]))
+		if (!std::isdigit(s[i]))
 			err();
 	if (s[0] == '0')
 		err();
@@ -20,6 +25,7 @@ static void checkPositiveInteger(std::string s)
 
 int main(int argc, char **argv)
 {
+	// atexit(f);
 	if (argc < 2)
 		err();
 	std::vector<int> input;
