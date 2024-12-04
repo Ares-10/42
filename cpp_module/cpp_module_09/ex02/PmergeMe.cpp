@@ -21,14 +21,35 @@ PmergeMe &PmergeMe::operator=(PmergeMe const &src)
 	_deque = src._deque;
 	_vector_stopwatch = src._vector_stopwatch;
 	_deque_stopwatch = src._deque_stopwatch;
+	_jacobsthal = src._jacobsthal;
 	return *this;
+}
+
+void PmergeMe::generateJacobsthal()
+{
+	int next;
+	size_t sum;
+
+	sum = 4;
+	_jacobsthal.push_back(2);
+	_jacobsthal.push_back(2);
+	while (sum < _input.size())
+	{
+		next = _jacobsthal.back() + 2 * _jacobsthal[_jacobsthal.size() - 2];
+		_jacobsthal.push_back(next);
+		sum += next;
+	}
 }
 
 PmergeMe::PmergeMe(std::vector<int> input)
 {
-	_input = std::move(input);
+	_input = input;
+	_vector = _input;
+	for (size_t i = 0; i < _input.size(); i++)
+		_deque.push_back(_input[i]);
 	_vector_stopwatch = 0;
 	_deque_stopwatch = 0;
+	generateJacobsthal();
 }
 
 void PmergeMe::printBefore() const
@@ -62,12 +83,6 @@ void PmergeMe::printResult() const
 	printStopwatch();
 }
 
-void PmergeMe::initStopwatch()
-{
-	_vector_stopwatch = 0;
-	_deque_stopwatch = 0;
-}
-
 void PmergeMe::sort()
 {
 	clock_t start_time;
@@ -85,7 +100,87 @@ void PmergeMe::sort()
 
 void PmergeMe::sortVector()
 {
+	fordJohnsonVectorAlgorithm(1);
 }
+
+void PmergeMe::fordJohnsonVectorAlgorithm(int node_size)
+{
+	if (node_size != 1)
+		groupingVector(node_size);
+	if (node_size * 2 <= static_cast<int>(_vector.size()))
+	{
+		fordJohnsonVectorAlgorithm(node_size * 2);
+		binaryInsertVector(node_size);
+	}
+}
+
+static void moveVector(std::vector<int> &a, std::vector<int> &b, int apos, int bpos, int size)
+{
+	apos = apos * size;
+	bpos = bpos * size;
+	for (int i = 0; i < size; i++)
+		a.insert(a.begin() + apos + i, b[bpos + i]);
+	b.erase(b.begin() + bpos, b.begin() + bpos + size);
+}
+
+static int binarySearch(const std::vector<int> &a, int n, int left, int right, int node_size)
+{
+	int mid;
+
+	mid = (left + right) / 2;
+	if (right <= left)
+		return mid;
+	if (a[mid * node_size] > n)
+		return binarySearch(a, n, left, mid, node_size);
+	if (a[mid * node_size] < n)
+		return binarySearch(a, n, mid + 1, right, node_size);
+	return mid;
+}
+
+void PmergeMe::binaryInsertVector(int node_size)
+{
+	std::vector<int> a((_input.size() / node_size / 2) * node_size);
+	std::vector<int> b((_input.size() - a.size()) / node_size * node_size);
+	size_t i;
+	size_t j;
+	int pos;
+
+	for (i = 0; i < a.size() / node_size; i++)
+	{
+		for (int k = 0; k < node_size; k++)
+			a[i * node_size + k] = _vector[i * 2 * node_size + k];
+		for (int k = 0; k < node_size; k++)
+			b[i * node_size + k] = _vector[(i * 2 + 1) * node_size + k];
+	}
+	for (i = a.size(); i < b.size(); i++)
+		b[i] = _vector[a.size() + i];
+
+	moveVector(a, b, 0, 0, node_size);
+	j = 0;
+	i = 0;
+	while (true)
+	{
+		if (j == 0)
+			j = std::min(static_cast<int>(b.size()) / node_size, _jacobsthal[i++]);
+		pos = binarySearch(a, b[--j * node_size], 0, a.size() / node_size - 1, node_size);
+		moveVector(a, b, pos, j, node_size);
+		if (b.empty())
+		{
+			for (i = 0; i < a.size(); i++)
+				_vector[i] = a[i];
+			return;
+		}
+	}
+}
+
+void PmergeMe::groupingVector(int node_size)
+{
+	for (size_t i = 0; i + node_size < _vector.size(); i += node_size)
+		if (_vector[i] < _vector[i + node_size / 2])
+			for (int j = 0; j < node_size / 2; j++)
+				std::swap(_vector[i + j], _vector[i + j + node_size / 2]);
+}
+
 
 void PmergeMe::sortDeque()
 {

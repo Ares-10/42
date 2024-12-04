@@ -14,16 +14,24 @@ private:
 	double				_vector_stopwatch;
 	double				_deque_stopwatch;
 
+	std::vector<int>	_jacobsthal;
+
 	PmergeMe();
+
+	void	generateJacobsthal();
 
 	void	printBefore() const;
 	void	printAfter() const;
 	void	printStopwatch() const;
 
-	void	initStopwatch();
-
 	void	sortVector();
 	void	sortDeque();
+
+	void	fordJohnsonVectorAlgorithm(int node_size);
+
+	void	binaryInsertVector(int node_size);
+
+	void	groupingVector(int node_size);
 
 public:
 	PmergeMe(std::vector<int> input);

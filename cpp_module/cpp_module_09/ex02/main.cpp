@@ -30,6 +30,8 @@ int main(int argc, char **argv)
 		input.push_back(static_cast<int>(strtod(str.c_str(), NULL)));
 	}
 	PmergeMe pmerge_me = PmergeMe(input);
+	std::cout << std::endl;
 	pmerge_me.sort();
 	pmerge_me.printResult();
+	std::cout << std::endl;
 }
