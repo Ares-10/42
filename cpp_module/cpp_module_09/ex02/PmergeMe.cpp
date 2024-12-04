@@ -170,16 +170,16 @@ void PmergeMe::binaryInsertVector(int node_size)
 	i = 0;
 	while (true)
 	{
-		if (j == 0)
-			j = std::min(static_cast<int>(b.size()) / node_size, _jacobsthal[i++]);
-		pos = binarySearchVector(a, b[--j * node_size], 0, a.size() / node_size - 1, node_size);
-		moveVector(a, b, pos, j, node_size);
 		if (b.empty())
 		{
 			for (i = 0; i < a.size(); i++)
 				_vector[i] = a[i];
 			return;
 		}
+		if (j == 0)
+			j = std::min(static_cast<int>(b.size()) / node_size, _jacobsthal[i++]);
+		pos = binarySearchVector(a, b[--j * node_size], 0, a.size() / node_size - 1, node_size);
+		moveVector(a, b, pos, j, node_size);
 	}
 }
 
@@ -259,16 +259,16 @@ void PmergeMe::binaryInsertDeque(int node_size)
 	i = 0;
 	while (true)
 	{
-		if (j == 0)
-			j = std::min(static_cast<int>(b.size()) / node_size, _jacobsthal[i++]);
-		pos = binarySearchDeque(a, b[--j * node_size], 0, a.size() / node_size - 1, node_size);
-		moveDeque(a, b, pos, j, node_size);
 		if (b.empty())
 		{
 			for (i = 0; i < a.size(); i++)
 				_deque[i] = a[i];
 			return;
 		}
+		if (j == 0)
+			j = std::min(static_cast<int>(b.size()) / node_size, _jacobsthal[i++]);
+		pos = binarySearchDeque(a, b[--j * node_size], 0, a.size() / node_size - 1, node_size);
+		moveDeque(a, b, pos, j, node_size);
 	}
 }
 
