@@ -75,9 +75,9 @@ void PmergeMe::printAfter() const
 void PmergeMe::printStopwatch() const
 {
 	std::cout << "Time to process a range of " << _input.size()
-			<< " elements with std::vector : " << _vector_stopwatch << " us:" << std::endl;
+			<< " elements with std::vector : " << _vector_stopwatch << " us" << std::endl;
 	std::cout << "Time to process a range of " << _input.size()
-			<< " elements with std::deque : " << _deque_stopwatch << " us:" << std::endl;
+			<< " elements with std::deque : " << _deque_stopwatch << " us" << std::endl;
 }
 
 void PmergeMe::printResult() const
