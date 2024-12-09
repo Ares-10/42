@@ -37,7 +37,7 @@ static void checkValidExpression(const std::string &expression)
 
 RPN::RPN(const std::string &expression) : _result(0)
 {
-	int	n;
+	int n;
 
 	checkValidExpression(expression);
 	for (size_t i = 0; i < expression.size(); i += 2)
@@ -57,7 +57,11 @@ RPN::RPN(const std::string &expression) : _result(0)
 			else if (expression[i] == '*')
 				n = _stack.top() * n;
 			else if (expression[i] == '/')
+			{
+				if (n == 0)
+					throw std::runtime_error("Error");
 				n = _stack.top() / n;
+			}
 			_stack.pop();
 			_stack.push(n);
 		}
